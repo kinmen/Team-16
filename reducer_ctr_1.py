@@ -1,43 +1,42 @@
-#!/usr/bin/env python
-
-from operator import itemgetter
 import sys
 
-current_UserID = None
-current_impressions = 0
-current_clicks =  0
-UserID = None
 
-# input comes from STDIN
+current_uid = None
+current_click = 0
+current_impression = 0
+current_age = None
+
+
 for line in sys.stdin:
-    # remove leading and trailing whitespace
+
+    # remove entrailing white spaces
     line = line.strip()
 
-    # parse the input we got from mapper.py
-    UserID, clicks, impressions = line.split('\t')
+    # split line to variables
+    uid, click, impression, age = line.split('\t')
 
-    # convert count (currently a string) to int
-    try:
-        clicks = int(clicks)
-        impressions = int(impressions)
-    except ValueError:
-        # count was not a number, so silently
-        # ignore/discard this line
-        continue
 
-    # this IF-switch only works because Hadoop sorts map output
-    # by key (here: word) before it is passed to the reducer
-    if current_UserID == UserID:
-        current_clicks += clicks
-        current_impressions += impressions
+    if current_uid == uid:
+
+        # if data exists, cumulate
+        if click != "-1" and impression != "-1":
+            current_click += float(int(click))
+            current_impression += float(int(impression))
+
+        # each user should have one age
+        if age != "-1":
+            current_age = age
+
     else:
-        if current_UserID:
-            # write result to STDOUT
-            print '%s\t%s\t%s' % (current_UserID, current_clicks, current_impressions)
-        current_clicks = clicks
-        current_impressions = impressions
-        current_UserID = UserID
+        if current_uid:
+            # print stdout
+            print '%s\t%s\t%s\t%s' % (current_uid, current_age, current_click, current_impression)
+        # reset parameters
+            current_click = 0
+            current_impression = 0
+        current_age = age
+        current_uid = uid
 
-# do not forget to output the last word if needed!
-if current_UserID == UserID:
-    print '%s\t%s\t%s' % (current_UserID, current_clicks, current_impressions)
+# print last line
+if current_uid:
+    print '%s\t%s\t%s\t%s' % (current_uid, current_age, current_click, current_impression)

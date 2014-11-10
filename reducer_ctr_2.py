@@ -1,44 +1,38 @@
-#!/usr/bin/env python
-
-from operator import itemgetter
 import sys
 
-current_age = 0
-current_clicks = 0
-current_impressions =  0
+current_click = 0
+current_impression = 0
+current_age = None
 
-
-# input comes from STDIN
 for line in sys.stdin:
-    # remove leading and trailing whitespace
+
+    # remove entrailing white spaces
     line = line.strip()
 
-    # parse the input we got from mapper.py
-    age, clicks, impressions = line.split('\t')
+    # assign variables
+    age, click, impression = line.split('\t')
 
-    # convert count (currently a string) to int
+    # filter out bad data
     try:
-        age = int(age)
-        clicks = int(clicks)
-        impressions = int(impressions)
+        click = float(click)
+        impression = float(impression)
     except ValueError:
-        # count was not a number, so silently
-        # ignore/discard this line
-        continue
+        pass
 
-    # this IF-switch only works because Hadoop sorts map output
-    # by key (here: word) before it is passed to the reducer
+    # cumulate data based on age
     if current_age == age:
-        current_clicks += clicks
-        current_impressions += impressions
-    else:
-        if current_age:
-            # write result to STDOUT
-            print '%s\t%s' % (current_age, (float(current_clicks)/float(current_impressions)))
-        current_age = age
-        current_clicks = clicks
-        current_impressions = impressions
+        current_click += click
+        current_impression += impression
 
-# do not forget to output the last word if needed!
-if current_age == age:
-    print '%s\t%s' % (current_age, (float(current_clicks)/float(current_impressions)))
+    else:
+        # print stdout
+        if current_age:
+            print '%s\t%f\t%f' % (current_age, current_click, current_impression)
+        # reset parameters
+        current_click = click
+        current_impression = impression
+        current_age = age
+
+# print last line
+if current_age:
+    print '%s\t%s\t%s' % (current_age, current_click,current_impression)
