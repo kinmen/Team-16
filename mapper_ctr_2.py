@@ -6,7 +6,7 @@ for line in sys.stdin:
     line = line.strip()
 
     # assign variables
-    uid, age, click, impression  = line.split('\t')
+    age, click, impression  = line.split('\t')
 
     # print stdout
     print '%s\t%s\t%s' % (age, click, impression)
