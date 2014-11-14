@@ -1,52 +1,53 @@
 import sys
 
-FIELDS = ["click", "impression", "display_url", "ad_id", "advertiser_id",\
-          "depth", "position", "query_id", "keyword_id", "title_id",\
-          "description_id", "user_id"]
-
-def parse_line(line):
-    line = line.strip()
-    fields = line.split('\t')
-    field_dic = {}
-    for i in range(0, len(FIELDS)):
-        field_dic[FIELDS[i]] = fields[i]
-    return field_dic
-
 pclick = 0
 conditionalsclick = {}
-conditionalsnoclick = {}
 
-#assume each line is feature(ad id), clicks, impressions.
+#assume each line is feature value, feature(ad id), clicks, impressions.
+#ex. 10040 \t ad_id \t 0 \t 6
 
 
 def train(data):
     totalclicks = 0
     totalimps = 0
-    instances = []
     global pclick
+    k = 0
     
     #compute total clicks and total impressions, for P(Y)
     for line in data:
         instance = line.strip().split('\t')
-        clicks = instance[1]
-        imps = instance[2]
+        value = instance[0]
+        feature = instance[1]
+        clicks = instance[2]
+        imps = instance[3]
         totalclicks += int(clicks)
         totalimps += int(imps)
-        instances.append(instance)
+        if feature not in conditionalsclick.keys():
+            conditionalsclick[feature] = {}
+        conditionalsclick[feature][value] = instance
         
+##    print conditionalsclick
+##    print totalclicks
+##    print totalimps
+##    print pclick
 
+        
     #P(Y)
     pclick = float(totalclicks)/totalimps
+    m = 1
     
     #compute conditional probabilities. P(X|Y), P(X|not Y)
-    for instance in instances:
-        feature = instance[0]
-        clicks = int(instance[1])
-        imps = int(instance[2])
-        conditionalsclick[feature] = float(clicks)/totalclicks
-        conditionalsnoclick[feature] = float((imps - clicks))/(totalimps - imps)
+    for feature in conditionalsclick:
+        k = len(conditionalsclick[feature].keys()) + 1
+        for value in conditionalsclick[feature]:
+            instance = conditionalsclick[feature][value]
+            #print instance
+            clicks = int(instance[2])
+            imps = int(instance[3])
+            conditionalsclick[feature][value] = (float(clicks + m)/(totalclicks + (k*m)), float((imps - clicks + m))/(totalimps - totalclicks + (k*m)))
+        conditionalsclick[feature]["UNK"] = (float(m)/(totalclicks + (k*m)), float((m)/(totalimps - totalclicks + (k*m))))
 
-
+"""
 def predict(feature, plick):
 
     # max of P(X|Y)*P(Y)
@@ -58,8 +59,12 @@ def predict(feature, plick):
         return 1
     else:
         return 0
+"""
 
 train(sys.stdin)
 
-for k in conditionalsclick.keys():
-    print 'feature: %s, prediction: %s' % (k, predict(k, pclick))
+for k,values in conditionalsclick.items():
+    for value, tup in values.items():
+        print '%s\t%s\t%s\t%s' % (k, value, tup[0], tup[1])
+    
+print 'Total\tTotal\t%s\t%s' % (pclick, 1-pclick)
