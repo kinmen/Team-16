@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# get the outputs from the first MapReduce process
+# replace userid with your AWS id
+# update the directory path to where your outputs are stored
+s3cmd get s3://stat157-uq85def/home/<userid>/<folderpath>/*
+
+# concatenate all the data files to a single file
+cat part* > map1b.txt
+
+# remove all the files, leaving only the concatenated data
+rm part*
+
+# upload back to your AWS's s3 Console
+# replace userid with your AWS id
+# update the directory path to where you want to upload the file to
+s3cmd put map1b.txt s3://stat157-uq85def/home/<userid>/<folderpath>/map1b.txt
