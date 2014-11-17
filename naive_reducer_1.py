@@ -32,7 +32,7 @@ for line in sys.stdin:
     else:
         if current_uid:
             # print stdout
-            print '%s\t%s\t%s\t%s' % (current_uid, current_age, current_click, current_impression)
+            print '%s\t%s' % (current_uid, current_age)
         # reset parameters
             current_click = 0
             current_impression = 0
@@ -41,4 +41,4 @@ for line in sys.stdin:
 
 # print last line
 if current_uid:
-    print '%s\t%s\t%s\t%s' % (current_uid, current_age, current_click, current_impression)
+    print '%s\t%s' % (current_uid, current_age)
