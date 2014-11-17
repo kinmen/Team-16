@@ -31,17 +31,18 @@ def read_probs():
         key = "%s,%s" % (feature, value)
         probs[key] = (float(prob_click), float(prob_no_click))
     return probs
+##
+##def read_ages():
+##    ages = {}
+##    with open("user_age.txt", "r") as f:
+##        lines = f.readlines()
+##    for line in lines:
+##        line = line.strip()
+##        user, age = line.split('\t')
+##        ages[user] = age
+##    return ages
+##
 
-def read_ages():
-    ages = {}
-    with open("user_age.txt", "r") as f:
-        lines = f.readlines()
-    for line in lines:
-        line = line.strip()
-        user, age = line.split('\t')
-        ages[user] = age
-    return ages
-        
 def get_prob_from_dict(feature, value):
     """ Given feature and value returns probs.
     Returns 
@@ -59,15 +60,15 @@ def get_prob_from_dict(feature, value):
 
 
 prob_dict = read_probs()
-age_dict = read_ages()
+##age_dict = read_ages()
 
 # Reading validation / test lines
+# Input is format of "user age clicks impressions"
 for line in sys.stdin:
     line = line.strip()
     fields = line.split('\t')
     ### complete your code here
-    user = fields[11]
-    age = age_dict[user]
+    user, age, clicks, impressions = fields
     probs = get_prob_from_dict("age", age)
     total = get_prob_from_dict("Total", "Total")
     pclickgivendata = float(probs[0]*total[0])/((probs[0]*total[0])+(probs[1]*total[1]))
