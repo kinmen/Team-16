@@ -20,8 +20,8 @@ def train(data):
         feature = instance[1]
         clicks = instance[2]
         imps = instance[3]
-        totalclicks += int(clicks)
-        totalimps += int(imps)
+        totalclicks += int(float(clicks))
+        totalimps += int(float(imps))
         if feature not in conditionalsclick.keys():
             conditionalsclick[feature] = {}
         conditionalsclick[feature][value] = instance
@@ -42,8 +42,8 @@ def train(data):
         for value in conditionalsclick[feature]:
             instance = conditionalsclick[feature][value]
             #print instance
-            clicks = int(instance[2])
-            imps = int(instance[3])
+            clicks = int(float(instance[2]))
+            imps = int(float(instance[3]))
             conditionalsclick[feature][value] = (float(clicks + m)/(totalclicks + (k*m)), float((imps - clicks + m))/(totalimps - totalclicks + (k*m)))
         conditionalsclick[feature]["UNK"] = (float(m)/(totalclicks + (k*m)), float((m)/(totalimps - totalclicks + (k*m))))
 
