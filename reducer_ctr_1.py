@@ -24,7 +24,6 @@ for line in sys.stdin:
         if click != "-1" and impression != "-1":
             current_click += float(int(click))
             current_impression += float(int(impression))
-        else:
 
         # each user should have one age
         if age != "-1":
