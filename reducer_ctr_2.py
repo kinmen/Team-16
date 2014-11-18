@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import sys
 
 current_click = 0
@@ -17,7 +19,7 @@ for line in sys.stdin:
         click = float(click)
         impression = float(impression)
     except ValueError:
-        pass
+        continue
 
     # cumulate data based on age
     if current_age == age:
