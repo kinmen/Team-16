@@ -7,6 +7,7 @@ current_uid = None
 current_click = 0
 current_impression = 0
 current_age = None
+current_type = None
 
 
 for line in sys.stdin:
@@ -15,7 +16,7 @@ for line in sys.stdin:
     line = line.strip()
 
     # split line to variables
-    uid, click, impression, age = line.split('\t')
+    uid, click, impression, age, typeofdata = line.split('\t')
 
 
     if current_uid == uid:
@@ -32,13 +33,14 @@ for line in sys.stdin:
     else:
         if current_uid:
             # print stdout
-            print '%s\t%s\t%s\t%s' % (current_uid, current_age, current_click, current_impression)
+            print '%s\t%s\t%s\t%s\t%s' % (current_uid, current_age, current_click, current_impression, current_type)
         # reset parameters
             current_click = 0
             current_impression = 0
         current_age = age
         current_uid = uid
+        current_type = typeofdata
 
 # print last line
 if current_uid:
-    print '%s\t%s\t%s\t%s' % (current_uid, current_age, current_click, current_impression)
+    print '%s\t%s\t%s\t%s\t%s' % (current_uid, current_age, current_click, current_impression, current_type)

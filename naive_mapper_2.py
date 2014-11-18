@@ -63,16 +63,21 @@ prob_dict = read_probs()
 ##age_dict = read_ages()
 
 # Reading validation / test lines
-# Input is format of "user age clicks impressions"
+# Input is format of "user age clicks impressions typeofdata"
 for line in sys.stdin:
     line = line.strip()
     fields = line.split('\t')
     ### complete your code here
-    user, age, clicks, impressions = fields
+    user, age, trueclicks, impressions = fields
+    trueclicks = int(float(trueclicks))
+    impressions = int(float(impressions))
     probs = get_prob_from_dict("age", age)
     total = get_prob_from_dict("Total", "Total")
     pclickgivendata = float(probs[0]*total[0])/((probs[0]*total[0])+(probs[1]*total[1]))
     click = 0
     if pclickgivendata > 0.5:
         click = 1
-    print "%s\t%s" % (pclickgivendata, click)
+    for i in xrange(trueclicks):
+        print "%s\t%s\t%s\t%s" % (pclickgivendata, click, typeofdata, 1)
+    for j in xrange(impressions - trueclicks):
+        print "%s\t%s\t%s\t%s" % (pclickgivendata, click, typeofdata, 0)
