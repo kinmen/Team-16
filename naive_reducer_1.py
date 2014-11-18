@@ -29,6 +29,9 @@ for line in sys.stdin:
         # each user should have one age
         if age != "-1":
             current_age = age
+            
+        if typeofdata != "-1":
+            current_type = typeofdata
 
     else:
         if current_uid:
