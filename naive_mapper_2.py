@@ -45,7 +45,7 @@ def read_probs():
 
 def get_prob_from_dict(feature, value):
     """ Given feature and value returns probs.
-    Returns 
+    Returns
     (Prob(feature = value | click), Prob(feature = value | no click))
     if value is not in the dictionary
     (Prob(feature = "UNK" | click), Prob(feature = "UNK" | no click))
@@ -68,7 +68,7 @@ for line in sys.stdin:
     line = line.strip()
     fields = line.split('\t')
     ### complete your code here
-    user, age, trueclicks, impressions = fields
+    user, age, trueclicks, impressions, typeofdata = fields
     trueclicks = int(float(trueclicks))
     impressions = int(float(impressions))
     probs = get_prob_from_dict("age", age)
