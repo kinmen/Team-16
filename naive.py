@@ -22,6 +22,8 @@ def train(data):
         imps = instance[3]
         totalclicks += int(float(clicks))
         totalimps += int(float(imps))
+        if value == "-1":
+            continue
         if feature not in conditionalsclick.keys():
             conditionalsclick[feature] = {}
         conditionalsclick[feature][value] = instance
