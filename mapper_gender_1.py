@@ -26,4 +26,4 @@ for line in sys.stdin:
         uid = line[0]
         gender = line[1]
         print '%s\t%s\t%s\t%s' % (uid, click, impression, gender)
-        #gender is 1 for male, 2 for female, 0 for unknown
+        #gender is 1 for male, 2 for female, 0 for 'unknown'
