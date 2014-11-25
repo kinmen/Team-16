@@ -38,3 +38,4 @@ for line in sys.stdin:
 # print last line
 if current_gender:
     print '%s\t%s\t%f\t%f' % (current_gender, 'gender', current_click, current_impression)
+    #gender is 1 for male, 2 for female, 0 for 'unknown'
