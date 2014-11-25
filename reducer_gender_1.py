@@ -48,3 +48,4 @@ for line in sys.stdin:
 if current_uid:
     # print '%s\t%s\t%s\t%s' % (current_uid, current_gender, current_click, current_impression)
     print '%s\t%s\t%s' % (current_gender, current_click, current_impression)
+    ##gender is 1 for male, 2 for female, 0 for 'unknown'
