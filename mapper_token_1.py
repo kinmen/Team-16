@@ -25,11 +25,14 @@ for line in sys.stdin:
         queryid = line[9]
         titleid = line [11]
         print '%s\t%s\t%s\t%s\t%s\t%s' % (queryid, query_tokens, titleid, title_tokens, click, impression)
-    elif len(line[1]) > 5:
-        titleid = line[0]
-        title_tokens = line[1]
+    elif line[0] == 'title':
+        titleid = line[1]
+        title_tokens = line[2]
         print '%s\t%s\t%s\t%s\t%s\t%s' % (queryid, query_tokens, titleid, title_tokens, click, impression)
     else:
-    	queryid = line[0]
-    	query_tokens = line[1]
+    	queryid = line[1]
+    	query_tokens = line[2]
     	print '%s\t%s\t%s\t%s\t%s\t%s' % (queryid, query_tokens, titleid, title_tokens, click, impression)
+#we need to append the query and title token files with an initial
+#column that identifies which file it is because they are
+#indistinguishable otherwise
