@@ -28,6 +28,7 @@ for line in sys.stdin:
         # cumulate query tokens
         if query_tokens != "-1":
             current_qtokens = eval(query_tokens) + current_qtokens
+
         # titleid and tokens are all scrambled
         if titleid != "-1" and title_tokens != "-1":
             title_dic[titleid] = title_dic.get(titleid, []) + eval(title_tokens)
@@ -41,13 +42,16 @@ for line in sys.stdin:
             # print such that each titleid gets an output
             # this way, we can run a second mapreduce to
             # cumulate the titleid tokens
-            for i in range(len(current_titleid)):
+            if range(len(current_titleid)) > 0:
+                for i in range(len(current_titleid)):
 
+                    print '%s\t%s\t%s\t%s\t%s\t%s' % (current_titleid, title_dic.get(current_titleid[i]), current_queryid, current_qtokens, current_click, current_impression)
+                    # so that we don't recount, set to zero
+                    # for the rest of the iterations
+                    current_click = 0
+                    current_impression = 0
+            else:
                 print '%s\t%s\t%s\t%s\t%s\t%s' % (current_titleid, title_dic.get(current_titleid[i]), current_queryid, current_qtokens, current_click, current_impression)
-                # so that we don't recount, set to zero
-                # for the rest of the iterations
-                current_click = 0
-                current_impression = 0
         # reset parameters
         if click != "-1" and impression != "-1":
             current_click = float(int(click))
@@ -59,15 +63,12 @@ for line in sys.stdin:
         current_titleid = "-1"
 
 # print last line
-if current_queryid:
-    current_titleid = title_dic.keys()
-    # print such that each titleid gets an output
-    # this way, we can run a second mapreduce to
-    # cumulate the titleid tokens
+if range(len(current_titleid)) > 0:
     for i in range(len(current_titleid)):
         print '%s\t%s\t%s\t%s\t%s\t%s' % (current_titleid, title_dic.get(current_titleid[i]), current_queryid, current_qtokens, current_click, current_impression)
         # so that we don't recount, set to zero
         # for the rest of the iterations
         current_click = 0
         current_impression = 0
-
+else:
+    print '%s\t%s\t%s\t%s\t%s\t%s' % (current_titleid, title_dic.get(current_titleid[i]), current_queryid, current_qtokens, current_click, current_impression)
