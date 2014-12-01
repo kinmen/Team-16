@@ -27,7 +27,7 @@ for line in sys.stdin:
 
         # cumulate query tokens
         if query_tokens != "-1":
-            current_qtokens = query_tokens + current_qtokens
+            current_qtokens = eval(query_tokens) + current_qtokens
         # titleid and tokens are all scrambled
         if titleid != "-1" and title_tokens != "-1":
             title_dic[titleid] = title_dic.get(titleid, []) + eval(title_tokens)
