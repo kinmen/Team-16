@@ -10,8 +10,11 @@ current_click = 0
 current_imp = 0
 
 for line in sys.stdin:
+
     line = line.strip()
+
     titleid, ttoken, queryid, qtokens, click, impression = line.split('\t')
+
     try:
         qtoken = eval(qtoken)
         ttoken = eval(ttoken)
@@ -19,6 +22,7 @@ for line in sys.stdin:
         imp = int(impressions)
     except:
         continue
+
     if current_titleid == titleid:
         # cumulate title tokens, clicks, and impressions
         current_ttoken = current_ttoken + token
@@ -30,11 +34,15 @@ for line in sys.stdin:
 
     else:
         if current_titleid:
-            print '%s\t%s\t%s\t%s\t%s\t%s' % (current_titleid, current_ttokens,\
-                current_queryid, current_qtokens, current_click, current_imp)
+            print '%s\t%s\t%s\t%s\t%s\t%s' % (current_titleid, current_ttokens, current_queryid, current_qtokens, current_click, current_imp)
+        # reset parameters
         current_titleid = titleid
         current_queryid = None
         current_qtokens = None
         current_click = 0
         current_imp = 0
         current_ttokens = ttokens
+
+# print out last line
+if current_titleid:
+    print '%s\t%s\t%s\t%s\t%s\t%s' % (current_titleid, current_ttokens, current_queryid, current_qtokens, current_click, current_imp)
