@@ -43,9 +43,7 @@ for line in sys.stdin:
             # cumulate the titleid tokens
             for i in range(len(current_titleid)):
 
-                print '%s\t%s\t%s\t%s\t%s\t%s' %
-                    (current_titleid, title_dic.get(current_titleid[i]),
-                    current_queryid, current_qtokens, current_click, current_impression)
+                print '%s\t%s\t%s\t%s\t%s\t%s' % (current_titleid, title_dic.get(current_titleid[i]), current_queryid, current_qtokens, current_click, current_impression)
                 # so that we don't recount, set to zero
                 # for the rest of the iterations
                 current_click = 0
@@ -67,9 +65,7 @@ if current_queryid:
     # this way, we can run a second mapreduce to
     # cumulate the titleid tokens
     for i in range(len(current_titleid)):
-        print '%s\t%s\t%s\t%s\t%s\t%s' %
-            (current_titleid, title_dic.get(current_titleid[i]),
-            current_queryid, current_qtokens, current_click, current_impression)
+        print '%s\t%s\t%s\t%s\t%s\t%s' % (current_titleid, title_dic.get(current_titleid[i]), current_queryid, current_qtokens, current_click, current_impression)
         # so that we don't recount, set to zero
         # for the rest of the iterations
         current_click = 0
