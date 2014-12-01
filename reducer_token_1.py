@@ -51,7 +51,7 @@ for line in sys.stdin:
                     current_click = 0
                     current_impression = 0
             else:
-                print '%s\t%s\t%s\t%s\t%s\t%s' % (current_titleid, title_dic.get(current_titleid[i]), current_queryid, current_qtokens, current_click, current_impression)
+                print '%s\t%s\t%s\t%s\t%s\t%s' % (current_titleid, [], current_queryid, current_qtokens, current_click, current_impression)
         # reset parameters
         if click != "-1" and impression != "-1":
             current_click = float(int(click))
@@ -71,4 +71,4 @@ if range(len(current_titleid)) > 0:
         current_click = 0
         current_impression = 0
 else:
-    print '%s\t%s\t%s\t%s\t%s\t%s' % (current_titleid, title_dic.get(current_titleid[i]), current_queryid, current_qtokens, current_click, current_impression)
+    print '%s\t%s\t%s\t%s\t%s\t%s' % (current_titleid, [], current_queryid, current_qtokens, current_click, current_impression)
