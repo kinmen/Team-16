@@ -45,7 +45,7 @@ for line in sys.stdin:
             if range(len(current_titleid)) > 0:
                 for i in range(len(current_titleid)):
 
-                    print '%s\t%s\t%s\t%s\t%s\t%s' % (current_titleid, title_dic.get(current_titleid[i]), current_queryid, current_qtokens, current_click, current_impression)
+                    print '%s\t%s\t%s\t%s\t%s\t%s' % (current_titleid[i], title_dic.get(current_titleid[i]), current_queryid, current_qtokens, current_click, current_impression)
                     # so that we don't recount, set to zero
                     # for the rest of the iterations
                     current_click = 0
@@ -67,7 +67,7 @@ for line in sys.stdin:
 # print last line
 if range(len(current_titleid)) > 0:
     for i in range(len(current_titleid)):
-        print '%s\t%s\t%s\t%s\t%s\t%s' % (current_titleid, title_dic.get(current_titleid[i]), current_queryid, current_qtokens, current_click, current_impression)
+        print '%s\t%s\t%s\t%s\t%s\t%s' % (current_titleid[i], title_dic.get(current_titleid[i]), current_queryid, current_qtokens, current_click, current_impression)
         # so that we don't recount, set to zero
         # for the rest of the iterations
         current_click = 0
