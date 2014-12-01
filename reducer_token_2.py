@@ -16,8 +16,6 @@ for line in sys.stdin:
     titleid, ttoken, queryid, qtokens, click, impression = line.split('\t')
 
     try:
-        qtoken = eval(qtoken)
-        ttoken = eval(ttoken)
         click = int(click)
         imp = int(impressions)
     except:
