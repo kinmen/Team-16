@@ -59,8 +59,9 @@ for line in sys.stdin:
         else:
             current_click = 0
             current_impression = 0
+        title_dic = dict()
         current_queryid = queryid
-        current_qtokens = []
+        current_qtokens = list()
         current_titleid = "-1"
 
 # print last line
