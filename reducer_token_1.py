@@ -4,7 +4,7 @@ import sys
 
 
 current_queryid = None
-current_qtokens = list()
+current_qtokens = None
 current_click = 0
 current_impression = 0
 title_dic = dict()
@@ -27,11 +27,11 @@ for line in sys.stdin:
 
         # cumulate query tokens
         if query_tokens != "-1":
-            current_qtokens = eval(query_tokens) + current_qtokens
+            current_qtokens = query_tokens
 
         # titleid and tokens are all scrambled
         if titleid != "-1" and title_tokens != "-1":
-            title_dic[titleid] = title_dic.get(titleid, []) + eval(title_tokens)
+            title_dic[titleid] = title_dic.get(titleid, "") + title_tokens
 
 
     else:
@@ -61,7 +61,7 @@ for line in sys.stdin:
             current_impression = 0
         title_dic = dict()
         current_queryid = queryid
-        current_qtokens = list()
+        current_qtokens = None
         current_titleid = "-1"
 
 # print last line
