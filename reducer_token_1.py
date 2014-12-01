@@ -60,6 +60,7 @@ for line in sys.stdin:
             current_click = 0
             current_impression = 0
         current_queryid = queryid
+        current_qtokens = []
         current_titleid = "-1"
 
 # print last line
