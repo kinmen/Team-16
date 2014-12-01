@@ -5,7 +5,7 @@ import sys
 current_titleid = None
 current_queryid = None
 current_qtokens = None
-current_ttokens = []
+current_ttokens =
 current_click = 0
 current_imp = 0
 
@@ -15,15 +15,20 @@ for line in sys.stdin:
 
     titleid, ttoken, queryid, qtokens, click, impression = line.split('\t')
 
-    try:
-        click = int(click)
-        imp = int(impressions)
-    except:
-        continue
+    # just in case they are still around
+    if click != "-1" and impression != "-1":
+        try:
+            click = int(click)
+            imp = int(impressions)
+        except:
+            continue
+    else:
+        click = 0
+        imp = 0
 
     if current_titleid == titleid:
         # cumulate title tokens, clicks, and impressions
-        current_ttoken = current_ttoken + token
+        current_ttoken = ttoken
         current_click += click
         current_imp += imp
         # the rest are already set from the previous mapreduce
@@ -39,7 +44,6 @@ for line in sys.stdin:
         current_qtokens = None
         current_click = 0
         current_imp = 0
-        current_ttokens = ttokens
 
 # print out last line
 if current_titleid:
