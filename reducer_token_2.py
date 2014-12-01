@@ -17,6 +17,8 @@ for line in sys.stdin:
         ttoken = eval(ttoken)
         click = int(click)
         imp = int(impressions)
+    except:
+        continue
     if current_titleid == titleid:
         # cumulate title tokens, clicks, and impressions
         current_ttoken = current_ttoken + token
