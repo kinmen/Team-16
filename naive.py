@@ -1,4 +1,5 @@
 import sys
+import numpy as np
 
 pclick = 0
 conditionalsclick = {}
@@ -12,6 +13,8 @@ def train(data):
     totalimps = 0
     global pclick
     k = 0
+    simiclick = []
+    siminoclick = []
     
     #compute total clicks and total impressions, for P(Y)
     for line in data:
@@ -26,7 +29,13 @@ def train(data):
             continue
         if feature not in conditionalsclick.keys():
             conditionalsclick[feature] = {}
-        conditionalsclick[feature][value] = instance
+        if feature == 'simi':
+            for i in xrange(clicks):
+                simiclick.append(value)
+            for j in xrange(imps-clicks):
+                siminoclick.append(value)
+        else:
+            conditionalsclick[feature][value] = instance
         
 ##    print conditionalsclick
 ##    print totalclicks
@@ -40,14 +49,19 @@ def train(data):
     
     #compute conditional probabilities. P(X|Y), P(X|not Y)
     for feature in conditionalsclick:
-        k = len(conditionalsclick[feature].keys()) + 1
-        for value in conditionalsclick[feature]:
-            instance = conditionalsclick[feature][value]
-            #print instance
-            clicks = int(float(instance[2]))
-            imps = int(float(instance[3]))
-            conditionalsclick[feature][value] = (float(clicks + m)/(totalclicks + (k*m)), float((imps - clicks + m))/(totalimps - totalclicks + (k*m)))
-        conditionalsclick[feature]["UNK"] = (float(m)/(totalclicks + (k*m)), float((m)/(totalimps - totalclicks + (k*m))))
+        if feature == 'simi':
+            conditionalsclick[feature]['click'] = (np.mean(simiclick), np.var(simiclick))
+            conditionalsclick[feature]['noclick'] = (np.mean(siminoclick), np.var(siminoclick))
+            conditionalsclick[feature]['UNK'] = 1
+        else:
+            k = len(conditionalsclick[feature].keys()) + 1
+            for value in conditionalsclick[feature]:
+                instance = conditionalsclick[feature][value]
+                #print instance
+                clicks = int(float(instance[2]))
+                imps = int(float(instance[3]))
+                conditionalsclick[feature][value] = (float(clicks + m)/(totalclicks + (k*m)), float((imps - clicks + m))/(totalimps - totalclicks + (k*m)))
+            conditionalsclick[feature]["UNK"] = (float(m)/(totalclicks + (k*m)), float((m)/(totalimps - totalclicks + (k*m))))
 
 """
 def predict(feature, plick):

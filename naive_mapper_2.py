@@ -2,6 +2,8 @@
 
 import sys
 import os.path
+import math
+
 sys.path.append(os.path.dirname(__file__))
 
 feature_dict = { 5: "ad_id", 6: "advert_id" }
@@ -58,6 +60,19 @@ def get_prob_from_dict(feature, value):
         return prob_dict[key]
     return None
 
+def normpdf(x, mean, var):
+    pi = 3.1415926
+    denom = (2*pi*var)**.5
+    num = math.exp(-(float(x)-float(mean))**2/(2*var))
+    return num/denom
+
+
+def calc_prob_for_simi(simi):
+    clickmean, clickvar = get_prob_from_dict('simi', 'click')
+    nclickmean, nclickvar = get_prob_from_dict('simi', 'noclick')
+    clickprob = normpdf(simi, clickmean, clickvar)
+    noclickprob = normpdf(simi, nclickmean, nclickvar)
+    return clickprob,noclickprob
 
 prob_dict = read_probs()
 ##age_dict = read_ages()
@@ -68,11 +83,20 @@ for line in sys.stdin:
     line = line.strip()
     fields = line.split('\t')
     ### complete your code here
-    user, age, trueclicks, impressions, typeofdata = fields
+    ###
+    user, age, gender, simi, trueclicks, impressions, typeofdata = fields
+    ###
     trueclicks = int(float(trueclicks))
     impressions = int(float(impressions))
-    probs = get_prob_from_dict("age", age)
+    probs_age = get_prob_from_dict("age", age)
+    probs_gender = get_prob_from_dict("gender", gender)
+    ###
+    probs_simi = calc_prob_for_simi(simi)
+    ###
     total = get_prob_from_dict("Total", "Total")
+    probs = []
+    probs[0] = float(probs_age[0]*probs_gender[0]*probs_simi[0])
+    probs[1] = float(probs_age[1]*probs_gender[1]*probs_simi[1])
     pclickgivendata = float(probs[0]*total[0])/((probs[0]*total[0])+(probs[1]*total[1]))
     click = 0
     if pclickgivendata > 0.5:
