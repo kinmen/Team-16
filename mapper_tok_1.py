@@ -40,9 +40,11 @@ for line in sys.stdin:
     elif line[0] == 'key':
         keyid = line[1]
         key_tokens = line[2]
+        print '%s\t%s\t%s\t%s\t%s\t%s' % (queryid, query_tokens, titleid, title_tokens, keyid, key_tokens, descrid, descr_tokens, click, impression)
     elif line[0] == 'descr':
         descrid = line[1]
         descr_tokens = line[2]
+        print '%s\t%s\t%s\t%s\t%s\t%s' % (queryid, query_tokens, titleid, title_tokens, keyid, key_tokens, descrid, descr_tokens, click, impression)
     else:
         continue
 #we need to append the query and title token files with an initial
