@@ -4,8 +4,8 @@ import sys
 
 current_titleid = None
 current_queryid = None
-current_qtokens = None
-current_ttokens = None
+current_qtoken = None
+current_ttoken = None
 current_click = 0
 current_imp = 0
 
@@ -13,7 +13,7 @@ for line in sys.stdin:
 
     line = line.strip()
 
-    titleid, ttoken, queryid, qtokens, click, impression = line.split('\t')
+    titleid, ttoken, queryid, qtoken, click, impression = line.split('\t')
 
     # just in case they are still around
     if click != "-1" and impression != "-1":
@@ -33,18 +33,19 @@ for line in sys.stdin:
         current_imp += imp
         # the rest are already set from the previous mapreduce
         current_queryid = queryid
-        current_qtokens = qtokens
+        current_qtoken = qtoken
 
     else:
         if current_titleid:
-            print '%s\t%s\t%s\t%s\t%s\t%s' % (current_titleid, current_ttokens, current_queryid, current_qtokens, current_click, current_imp)
+            print '%s\t%s\t%s\t%s\t%s\t%s' % (current_titleid, current_ttoken, current_queryid, current_qtoken, current_click, current_imp)
         # reset parameters
         current_titleid = titleid
         current_queryid = queryid
-        current_qtokens = qtokens
+        current_qtoken = qtoken
         current_click = click
         current_imp = imp
+        current_ttoken = ttoken
 
 # print out last line
 if current_titleid:
-    print '%s\t%s\t%s\t%s\t%s\t%s' % (current_titleid, current_ttokens, current_queryid, current_qtokens, current_click, current_imp)
+    print '%s\t%s\t%s\t%s\t%s\t%s' % (current_titleid, current_ttoken, current_queryid, current_qtoken, current_click, current_imp)
