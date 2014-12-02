@@ -26,7 +26,8 @@ for line in sys.stdin:
         impression = int(impression)
     except ValueError:
         continue
-
+    if keyid == "-1":
+        print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' %  (descrid, descr_token, qid, query_token, titleid, title_token, keyid, key_token, click, impression)
     if current_keyid == keyid:
         if key_token != "-1":
             current_ttoken = title_token
