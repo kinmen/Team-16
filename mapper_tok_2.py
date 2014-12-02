@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-# This mapper is pretty much pointless
 
 import sys
 
