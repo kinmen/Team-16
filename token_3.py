@@ -4,11 +4,14 @@ import sys
 
 for line in sys.stdin:
 
+    line = line.strip()
+    line = line.split('\t')
+
     query_token = line[3]
     title_token = line[1]
     
-    qtokens = query_token.strip('|')
-    ttokens = title_token.strip('|')
+    qtokens = query_token.split('|')
+    ttokens = title_token.split('|')
 
     ### This loops through the ttok with the qtok to find and return
     ### any matching values as a list
