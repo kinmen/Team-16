@@ -5,7 +5,7 @@ import sys
 current_titleid = None
 current_queryid = None
 current_qtokens = None
-current_ttokens =
+current_ttokens = None
 current_click = 0
 current_imp = 0
 
@@ -19,7 +19,7 @@ for line in sys.stdin:
     if click != "-1" and impression != "-1":
         try:
             click = int(click)
-            imp = int(impressions)
+            imp = int(impression)
         except:
             continue
     else:
