@@ -21,8 +21,8 @@ def train(data):
         instance = line.strip().split('\t')
         value = instance[0]
         feature = instance[1]
-        clicks = instance[2]
-        imps = instance[3]
+        clicks = int(float(instance[2]))
+        imps = int(float(instance[3]))
         totalclicks += int(float(clicks))
         totalimps += int(float(imps))
         if value == "-1":
@@ -31,9 +31,9 @@ def train(data):
             conditionalsclick[feature] = {}
         if feature == 'simi':
             for i in xrange(clicks):
-                simiclick.append(value)
+                simiclick.append(float(value))
             for j in xrange(imps-clicks):
-                siminoclick.append(value)
+                siminoclick.append(float(value))
         else:
             conditionalsclick[feature][value] = instance
         
@@ -52,7 +52,7 @@ def train(data):
         if feature == 'simi':
             conditionalsclick[feature]['click'] = (np.mean(simiclick), np.var(simiclick))
             conditionalsclick[feature]['noclick'] = (np.mean(siminoclick), np.var(siminoclick))
-            conditionalsclick[feature]['UNK'] = 1
+            conditionalsclick[feature]['UNK'] = (1,1)
         else:
             k = len(conditionalsclick[feature].keys()) + 1
             for value in conditionalsclick[feature]:

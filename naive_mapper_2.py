@@ -72,7 +72,7 @@ def calc_prob_for_simi(simi):
     nclickmean, nclickvar = get_prob_from_dict('simi', 'noclick')
     clickprob = normpdf(simi, clickmean, clickvar)
     noclickprob = normpdf(simi, nclickmean, nclickvar)
-    return clickprob,noclickprob
+    return (clickprob,noclickprob)
 
 prob_dict = read_probs()
 ##age_dict = read_ages()
@@ -94,7 +94,7 @@ for line in sys.stdin:
     probs_simi = calc_prob_for_simi(simi)
     ###
     total = get_prob_from_dict("Total", "Total")
-    probs = []
+    probs = [1,1]
     probs[0] = float(probs_age[0]*probs_gender[0]*probs_simi[0])
     probs[1] = float(probs_age[1]*probs_gender[1]*probs_simi[1])
     pclickgivendata = float(probs[0]*total[0])/((probs[0]*total[0])+(probs[1]*total[1]))
