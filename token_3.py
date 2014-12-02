@@ -8,7 +8,7 @@ for line in sys.stdin:
     title_token = line[1]
     
     qtokens = query_token.strip('|')
-    ttoken = title_token.strip('|')
+    ttokens = title_token.strip('|')
 
     ### This loops through the ttok with the qtok to find and return
     ### any matching values as a list
