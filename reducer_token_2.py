@@ -40,10 +40,10 @@ for line in sys.stdin:
             print '%s\t%s\t%s\t%s\t%s\t%s' % (current_titleid, current_ttokens, current_queryid, current_qtokens, current_click, current_imp)
         # reset parameters
         current_titleid = titleid
-        current_queryid = None
-        current_qtokens = None
-        current_click = 0
-        current_imp = 0
+        current_queryid = queryid
+        current_qtokens = qtokens
+        current_click = click
+        current_imp = imp
 
 # print out last line
 if current_titleid:
