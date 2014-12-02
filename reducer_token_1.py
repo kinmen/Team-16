@@ -2,12 +2,12 @@
 
 import sys
 
-
-current_queryid = None
+current_titleid = None
+current_ttoken = None
+current_qid = None
 current_qtoken = None
 current_click = 0
-current_impression = 0
-title_dic = dict()
+current_imp = 0
 
 
 for line in sys.stdin:
@@ -17,60 +17,27 @@ for line in sys.stdin:
 
     # split for indexing
     queryid, query_token, titleid, title_token, click, impression = line.split('\t')
-
-    # if current query
-    if current_queryid == queryid:
-        # cumulate clicks and impressions
-
-        if click != "-1" and impression != "-1":
-            current_click += float(int(click))
-            current_impression += float(int(impression))
-
-        # cumulate query tokens
+    try:
+        click = int(click)
+        impression = int(impression)
+    except ValueError:
+        continue
+    if current_qid == queryid:
         if query_token != "-1":
             current_qtoken = query_token
-
-        # titleid and tokens are all scrambled
-        if titleid != "-1" and title_token != "-1":
-            title_dic[titleid] = title_dic.get(titleid, "") + title_token
-
+        if click != -1 and impression != -1:
+            current_click += click
+            current_imp += impression
 
     else:
-        # print output
-
-        if current_queryid:
-            current_titleid = title_dic.keys()
-            # print such that each titleid gets an output
-            # this way, we can run a second mapreduce to
-            # cumulate the titleid tokens
-            if len(current_titleid) > 0:
-                for i in range(len(current_titleid)):
-
-                    print '%s\t%s\t%s\t%s\t%s\t%s' % (current_titleid[i], title_dic.get(current_titleid[i]), current_queryid, current_qtoken, current_click, current_impression)
-                    # so that we don't recount, set to zero
-                    # for the rest of the iterations
-                    current_click = 0
-                    current_impression = 0
-
-            else:
-                print '%s\t%s\t%s\t%s\t%s\t%s' % (current_titleid, [], current_queryid, current_qtoken, current_click, current_impression)
-
-
-        # reset parameters
-        if click != "-1" and impression != "-1":
-            current_click = float(int(click))
-            current_impression = float(int(impression))
-        else:
-            current_click = 0
-            current_impression = 0
-        if current_qtoken != "-1":
-            current_qtoken = query_token
-        else:
-            current_qtoken = ""
-        title_dic = dict()
-        current_queryid = queryid
-
+        if current_qid:
+            print '%s\t%s\t%s\t%s\t%s\t%s' %  (current_titleid, current_ttoken, current_qid, current_qtoken, current_click, current_imp)
         current_titleid = titleid
+        current_ttoken = title_token
+        current_qid = queryid
+        current_qtoken = query_token
+        current_click = 0
+        current_imp = 0
 
-
-# print last line
+if current_qid:
+    print '%s\t%s\t%s\t%s\t%s\t%s' %  (current_titleid, current_ttoken, current_qid, current_qtoken, current_click, current_imp)
