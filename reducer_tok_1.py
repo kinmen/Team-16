@@ -26,6 +26,9 @@ for line in sys.stdin:
         impression = int(impression)
     except ValueError:
         continue
+    if queryid == "-1":
+        print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % (queryid, query_token, titleid, title_token, keyid, key_token, descrid, descr_token, click, impression)
+        continue
     if current_qid == queryid:
         if query_token != "-1":
             current_qtoken = query_token
