@@ -28,7 +28,7 @@ for line in sys.stdin:
         continue
 
     if current_descrid == descrid:
-        if descr_token != "-1":
+        if descr_token != 'z':
             current_dtoken = descr_token
 
 
@@ -43,7 +43,7 @@ for line in sys.stdin:
         current_ktoken = key_token
         current_descrid = descrid
         current_dtoken = descr_token
-        if click != -1 and impression != -1:
+        if click != 'z' and impression != 'z':
             current_click = click
             current_imp = impression
 
