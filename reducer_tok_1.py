@@ -26,13 +26,24 @@ for line in sys.stdin:
         impression = int(impression)
     except ValueError:
         continue
-    if queryid == "-1":
+    if queryid == 'z':
         print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % (titleid, title_token, keyid, key_token, descrid, descr_token, queryid, query_token, click, impression)
         continue
     if current_qid == queryid:
-        if query_token != "-1":
+        if query_token != 'z':
             current_qtoken = query_token
-
+        if current_titleid != titleid or current_keyid != keyid or current_descrid != descrid:
+            print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' %  (current_titleid, current_ttoken, current_keyid, current_ktoken, current_descrid, current_dtoken, current_qid, current_qtoken, current_click, current_imp)
+            current_titleid = titleid
+            current_ttoken = title_token
+            current_qid = queryid
+            current_qtoken = query_token
+            current_keyid = keyid
+            current_ktoken = key_token
+            current_descrid = descrid
+            current_dtoken = descr_token
+            current_click = click
+            current_imp = impression
 
     else:
         if current_qid:
