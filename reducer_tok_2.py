@@ -39,13 +39,13 @@ for line in sys.stdin:
         if current_titleid:
             print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' %  (current_keyid, current_ktoken, current_descrid, current_dtoken, current_qid, current_qtoken, current_titleid, current_ttoken, current_click, current_imp)
         current_titleid = titleid
-        current_ttoken = title_token
-        current_qid = queryid
-        current_qtoken = query_token
+        current_ttoken = ttoken
+        current_qid = qid
+        current_qtoken = qtoken
         current_keyid = keyid
-        current_ktoken = key_token
-        current_descrid - descrid
-        current_dtoken = descr_token
+        current_ktoken = ktoken
+        current_descrid = descrid
+        current_dtoken = dtoken
         current_click = 0
         current_impression = 0
 
