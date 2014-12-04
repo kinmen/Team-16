@@ -30,7 +30,7 @@ for line in sys.stdin:
         print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % (keyid, ktoken, descrid, dtoken, qid, qtoken, titleid, ttoken, click, impression)
         continue
     if current_titleid == titleid:
-        if title_token != "-1":
+        if ttoken != "-1":
             current_ttoken = ttoken
         if click != -1 and impression != -1:
             current_click += click
