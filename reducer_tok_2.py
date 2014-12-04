@@ -32,9 +32,7 @@ for line in sys.stdin:
     if current_titleid == titleid:
         if ttoken != "-1":
             current_ttoken = ttoken
-        if click != -1 and impression != -1:
-            current_click += click
-            current_imp += impression
+
 
     else:
         if current_titleid:
@@ -47,8 +45,9 @@ for line in sys.stdin:
         current_ktoken = ktoken
         current_descrid = descrid
         current_dtoken = dtoken
-        current_click = 0
-        current_impression = 0
+        if click != -1 and impression != -1:
+            current_click = click
+            current_imp = impression
 
 if current_titleid:
      print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' %  (current_keyid, current_ktoken, current_descrid, current_dtoken, current_qid, current_qtoken, current_titleid, current_ttoken, current_click, current_imp)
