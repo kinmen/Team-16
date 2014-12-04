@@ -39,11 +39,11 @@ for line in sys.stdin:
             print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' %  (current_qid, current_qtoken, current_titleid, current_ttoken, current_keyid, current_ktoken, current_descrid, current_dtoken, current_click, current_imp)
         current_titleid = titleid
         current_ttoken = title_token
-        current_qid = queryid
+        current_qid = qid
         current_qtoken = query_token
         current_keyid = keyid
         current_ktoken = key_token
-        current_descrid - descrid
+        current_descrid = descrid
         current_dtoken = descr_token
         current_click = 0
         current_imp = 0
