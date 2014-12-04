@@ -28,6 +28,7 @@ for line in sys.stdin:
         continue
     if keyid == "-1":
         print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' %  (descrid, descr_token, qid, query_token, titleid, title_token, keyid, key_token, click, impression)
+        continue
     if current_keyid == keyid:
         if key_token != "-1":
             current_ttoken = title_token
