@@ -5,16 +5,16 @@ import sys
 for line in sys.stdin:
 
     # setting default parameters for sorting
-    queryid = -1
-    titleid = -1
-    keyid = -1
-    descrid = -1
-    query_tokens = -1
-    title_tokens = -1
-    key_tokens = -1
-    descr_tokens = -1
-    click = -1
-    impression = -1
+    queryid = 'z'
+    titleid = 'z'
+    keyid = 'z'
+    descrid = 'z'
+    query_tokens = 'z'
+    title_tokens = 'z'
+    key_tokens = 'z'
+    descr_tokens = 'z'
+    click = 'z'
+    impression = 'z'
 
     # eliminate entrailing white spaces
     line = line.strip()
