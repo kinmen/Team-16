@@ -31,7 +31,7 @@ for line in sys.stdin:
         continue
     if current_titleid == titleid:
         if title_token != "-1":
-            current_ttoken = title_token
+            current_ttoken = ttoken
         if click != -1 and impression != -1:
             current_click += click
             current_imp += impression
