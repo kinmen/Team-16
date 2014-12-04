@@ -13,7 +13,6 @@ current_qtoken = None
 current_click = 0
 current_imp = 0
 
-
 for line in sys.stdin:
 
     # eliminate entrailing white spaces
