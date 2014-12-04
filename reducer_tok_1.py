@@ -27,7 +27,7 @@ for line in sys.stdin:
     except ValueError:
         continue
     if queryid == "-1":
-        print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % (queryid, query_token, titleid, title_token, keyid, key_token, descrid, descr_token, click, impression)
+        print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % (titleid, title_token, keyid, key_token, descrid, descr_token, queryid, query_token, click, impression)
         continue
     if current_qid == queryid:
         if query_token != "-1":
