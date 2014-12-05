@@ -21,11 +21,6 @@ for line in sys.stdin:
 
     # split for indexing
     descrid, descr_token, qid, query_token, titleid, title_token, keyid, key_token, click, impression = line.split('\t')
-    try:
-        click = int(click)
-        impression = int(impression)
-    except ValueError:
-        continue
     if current_descrid == descrid:
         if descr_token != 'z':
             current_dtoken = descr_token
