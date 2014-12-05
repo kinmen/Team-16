@@ -46,7 +46,7 @@ The results of this MapReduce, like with Age, is then used as inputs for the sec
 
 #### Prediction By Similarity Index
 
-To begin, the files <code>titleid_tokensid.txt, queryid_tokensid.txt, descriptionsid_tokensid.txt, and purchasedkeywordid_tokensid.txt</code> were each run in MapReduce with their corresponding <code>*_append.py</code> file (e.g. <code>title_file_append.py</code> was run with <code>titleid_tokensid.txt</code> file and an identity reducer). This was done because otherwise, each of the token files were indistinguishable from one another.
+To begin, the files <code>titleid_tokensid.txt, queryid_tokensid.txt, descriptionsid_tokensid.txt, and purchasedkeywordid_tokensid.txt</code> were each run in MapReduce with their corresponding <code>file_append_*.py</code> file (e.g. <code>file_append_title.py</code> was run with <code>titleid_tokensid.txt</code> file and an identity reducer). This was done because otherwise, each of the token files were indistinguishable from one another.
 
 Using the outputs from the above MapReduce along with the training data, we ran four MapReduce jobs to append the tokens to their subsequent ids. The Map-Reduce files are as follows:
 <ul>
@@ -56,7 +56,7 @@ Using the outputs from the above MapReduce along with the training data, we ran 
     <li><code>mapper_tok_4.py, reducer_tok_4.py</code></li>
 </ul>
 
-After all MapReduce jobs are completed, a final map reduce is run by using the file <code>token_3.py</code> as the mapper and an identity reducer. The final map reduce calculates similarity ratios for the number of matching tokens between:
+After all MapReduce jobs are completed, a final map reduce is run by using the file <code>token_simi.py</code> as the mapper and an identity reducer. The final map reduce calculates similarity ratios for the number of matching tokens between:
 <blockquote>
     <ul>
         <li>query to title</li>
@@ -76,15 +76,7 @@ Model
 ### Naive Bayes
 
 
-<!--1. naive.py identity on output of token mapreduce and output of gender and age
-2. naive_mapper_tok_1-4
-3. naive_mapper_agegender_5
-4. naive_token_3
-5. naive_mapper_2-->
-
-
-
-<code>naive.py</code> is run with an identity reducer with its inputs as the output from the Aggregating Data MapReduce. This file calculates the probabilities:
+<code>naive_train_model.py</code> is run locally with its inputs as the output from the Aggregating Data MapReduce. This file calculates the probabilities:
 <ul>
     <li><code>P(feature = value | click)</code></li>
     <li><code>P(feature = value | noclick)</code></li>
@@ -94,9 +86,12 @@ Model
     <li><code>p(feature="UNK" | noclick)</code></li>
 </ul>
 where UNK refers to the unknown values for the feature.
+The output of this is called <code>naive_probabilities.txt</code>
+
+
 
 After building the dictionary of conditional probabilities, we go back to using MapReduce for prediction.
-The following files are run to clean up validation data into the format that we want to finally do our predictions. They are run with <code>validation-20, titleid_tokensid.txt, queryid_tokensid.txt, descriptionsid_tokensid.txt, and purchasedkeywordid_tokensid.txt (appended as in Prediction By Similarity Index),userid_profile.txt</code>:
+The following files are run to clean up validation data into the format that we want to finally do our predictions. They are run with <code>validation-20, titleid_tokensid.txt, queryid_tokensid.txt, descriptionsid_tokensid.txt, and purchasedkeywordid_tokensid.txt (appended as in Prediction By Similarity Index), userid_profile.txt</code>:
 
 <ol>
     <li><code>naive_mapper_tok_1.py, naive_reducer_tok_1.py</code></li>
@@ -104,11 +99,11 @@ The following files are run to clean up validation data into the format that we 
     <li><code>naive_mapper_tok_3.py, naive_reducer_tok_3.py</code></li>
     <li><code>naive_mapper_tok_4.py, naive_reducer_tok_4.py</code></li>
     <li><code>naive_mapper_agegender_5.py, naive_reducer_agegender_5.py</code></li>
-    <li><code>naive_token_3.py, identity reducer</code></li>
+    <li><code>naive_token_simi.py, identity reducer</code></li>
 </ol>
 
 The final output of these MapReduce jobs is then run through the final MapReduce
-<code>naive_mapper_2.py, identity reducer</code>. This file implements out model and outputs predictions.
+<code>naive_pred_mapper.py, identity reducer</code>. This file is run with <code>naive_probabilities.txt</code> as a cache file. This file implements out model and outputs predictions.
 
 
 
