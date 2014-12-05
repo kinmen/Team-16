@@ -68,4 +68,4 @@ for line in sys.stdin:
 if current_uid:
     for i in current_ids:
         f = i[:11] + (current_age, current_gender)
-        print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % f
+        print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % f
