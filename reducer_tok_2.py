@@ -33,9 +33,9 @@ for line in sys.stdin:
         if ttoken != "-1":
             current_ttoken = ttoken
         if current_qid != qid or current+keyid != keyid or current_descrid != descrid:
-            print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' %  (current_keyid, current_ktoken, current_descrid, current_dtoken, current_qid, current_qtoken, current_titleid, current_ttoken, current_click, current_imp)
+            if current_click != 'z':
+                print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' %  (current_keyid, current_ktoken, current_descrid, current_dtoken, current_qid, current_qtoken, current_titleid, current_ttoken, current_click, current_imp)
             current_titleid = titleid
-            current_ttoken = ttoken
             current_qid = qid
             current_qtoken = qtoken
             current_keyid = keyid
