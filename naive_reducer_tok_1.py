@@ -30,7 +30,7 @@ for line in sys.stdin:
     except ValueError:
         continue
     if queryid == "-1":
-        print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % (titleid, title_token, keyid, key_token, descrid, descr_token, click, queryid, query_token, impression, uid, age, gender)
+        print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % (titleid, title_token, keyid, key_token, descrid, descr_token, queryid, query_token, click, impression, uid, age, gender)
         continue
     if current_qid == queryid:
         if query_token != "-1":
