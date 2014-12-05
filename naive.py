@@ -88,4 +88,5 @@ for k,values in conditionalsclick.items():
     for value, tup in values.items():
         print '%s\t%s\t%s\t%s' % (k, value, tup[0], tup[1])
     
-print 'Total\tTotal\t%s\t%s' % (pclick, 1-pclick)
+# print 'Total\tTotal\t%s\t%s' % (pclick, 1-pclick)
+print 'Total\tTotal\t%s\t%s' % (totalclicks, totalimps)

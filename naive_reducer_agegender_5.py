@@ -31,19 +31,20 @@ for line in sys.stdin:
         if age != 'z' and gender != 'z':
             current_age = age
             current_gender = gender
-        if (current_titleid != titleid or current_keyid != keyid or current_qid != qid or current_descrid != descrid):
-            if current_click != 'z':
-                current_ids.append((current_qid, current_qtoken, current_titleid, current_ttoken, current_keyid, current_ktoken, current_descrid, current_dtoken, current_click, current_imp, current_uid, current_age, current_gender))
-            current_titleid = titleid
-            current_ttoken = title_token
-            current_qid = qid
-            current_qtoken = query_token
-            current_keyid = keyid
-            current_ktoken = key_token
-            current_descrid = descrid
-            current_dtoken = descr_token
-            current_click = click
-            current_imp = impression
+        else:
+            if (current_titleid != titleid or current_keyid != keyid or current_qid != qid or current_descrid != descrid):
+                if current_click != 'z':
+                    current_ids.append((current_qid, current_qtoken, current_titleid, current_ttoken, current_keyid, current_ktoken, current_descrid, current_dtoken, current_click, current_imp, current_uid, current_age, current_gender))
+                current_titleid = titleid
+                current_ttoken = title_token
+                current_qid = qid
+                current_qtoken = query_token
+                current_keyid = keyid
+                current_ktoken = key_token
+                current_descrid = descrid
+                current_dtoken = descr_token
+                current_click = click
+                current_imp = impression
 
     else:
         if current_uid:
