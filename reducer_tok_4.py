@@ -63,5 +63,5 @@ for line in sys.stdin:
 
 if current_descrid:
     for i in current_ids:
-                f = i[:7] + (current_dtoken,) + i[8:]
-                print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % f
+        f = i[:7] + (current_dtoken,) + i[8:]
+        print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % f
