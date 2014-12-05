@@ -34,15 +34,19 @@ The results of the MapReduce is then used as inputs for the second MapReduce, us
 
 #### Prediction Based on Gender
 
-Like with age, gender is also in a separate file from the instances file. The process to aggregate this data is done in a similar manner to the aggregation of data based on age. Using the same initial input file as our MapReduce for age, we run <code>mapper_gender_1.py</code> and <code>reducer_gender_1.py</code>. The output data is in the form: <br>
-    <code>'gender \t click \t impression'</code>.
+Like with age, gender is also in a separate file from the instances file. The process to aggregate this data is done in a similar manner to the aggregation of data based on age. Using the same initial input file as our MapReduce for age, we run <code>mapper_gender_1.py</code> and <code>reducer_gender_1.py</code>. The output data is in the form:
+    <blockquote>
+        <code>'gender \t click \t impression'</code>.
+    </blockquote>
 
-The results of this MapReduce, like with Age, is then used as inputs for the second MapReduce using the mapper and reducer <code>mapper_gender_2,py</code> and reducer_gender_2.py</code>. This outputs data in the form:<br>
-    <code>'feature value \t feature name \t clicks \t impression'</code>
+The results of this MapReduce, like with Age, is then used as inputs for the second MapReduce using the mapper and reducer <code>mapper_gender_2,py</code> and reducer_gender_2.py</code>. This outputs data in the form:
+    <blockquote>
+        <code>'feature value \t feature name \t clicks \t impression'</code>
+    </blockquote>
 
 #### Prediction By Similarity Index
 
-We use a similarity ratio to measure the similarity between ids through their token
+<!--We use a similarity ratio to measure the similarity between ids through their token-->
 
 
 
