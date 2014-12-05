@@ -75,7 +75,16 @@ Model
 -------------
 ### Naive Bayes
 
-After getting our output from the Aggregating Data MapReduce, <code>naive.py</code> is run locally. This file calculates the probabilities:
+
+<!--1. naive.py identity on output of token mapreduce and output of gender and age
+2. naive_mapper_tok_1-4
+3. naive_mapper_agegender_5
+4. naive_token_3
+5. naive_mapper_2-->
+
+
+
+<code>naive.py</code> is run with an identity reducer with its inputs as the output from the Aggregating Data MapReduce. This file calculates the probabilities:
 <ul>
     <li><code>P(feature = value | click)</code></li>
     <li><code>P(feature = value | noclick)</code></li>
@@ -86,5 +95,20 @@ After getting our output from the Aggregating Data MapReduce, <code>naive.py</co
 </ul>
 where UNK refers to the unknown values for the feature.
 
-After building the dictionary of conditional probabilities, we go back to using MapReduce for prediction. <code>naive_mapper_1.py</code> and <code>naive_reducer_1.py</code> are run to clean up validation data into the format we want for our second mapreduce job for prediction. It combines the userid, age, clicks, and impressions for each instance in the validation data and returns an output in the form of: <code>'uid \t click \t impression \t age'</code>.
+After building the dictionary of conditional probabilities, we go back to using MapReduce for prediction.
+The following files are run to clean up validation data into the format that we want to finally do our predictions. They are run with <code>validation-20, titleid_tokensid.txt, queryid_tokensid.txt, descriptionsid_tokensid.txt, and purchasedkeywordid_tokensid.txt (appended as in Prediction By Similarity Index),userid_profile.txt</code>:
+
+<ol>
+    <li><code>naive_mapper_tok_1.py, naive_reducer_tok_1.py</code></li>
+    <li><code>naive_mapper_tok_2.py, naive_reducer_tok_2.py</code></li>
+    <li><code>naive_mapper_tok_3.py, naive_reducer_tok_3.py</code></li>
+    <li><code>naive_mapper_tok_4.py, naive_reducer_tok_4.py</code></li>
+    <li><code>naive_mapper_agegender_5.py, naive_reducer_agegender_5.py</code></li>
+    <li><code>naive_token_3.py, identity reducer</code></li>
+</ol>
+
+The final output of these MapReduce jobs is then run through the final MapReduce
+<code>naive_mapper_2.py, identity reducer</code>. This file implements out model and outputs predictions.
+
+
 
