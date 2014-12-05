@@ -30,9 +30,9 @@ for line in sys.stdin:
     if current_qid == queryid:
         if query_token != 'z':
             current_qtoken = query_token
-        if (current_titleid != titleid or current_keyid != keyid or current_descrid != descrid) and current_titleid != 'z':
+        if (current_titleid != titleid or current_keyid != keyid or current_descrid != descrid or current_uid != uid) and current_titleid != 'z':
             if current_click != 'z':
-                current_qids.append((current_titleid, current_ttoken, current_keyid, current_ktoken, current_descrid, current_dtoken, current_qid, current_qtoken, current_click, current_imp))
+                current_qids.append((current_titleid, current_ttoken, current_keyid, current_ktoken, current_descrid, current_dtoken, current_qid, current_qtoken, current_click, current_imp, current_uid, current_age, current_gender))
                 #print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' %  (current_titleid, current_ttoken, current_keyid, current_ktoken, current_descrid, current_dtoken, current_qid, current_qtoken, current_click, current_imp)
             current_titleid = titleid
             current_ttoken = title_token
@@ -43,6 +43,9 @@ for line in sys.stdin:
             current_dtoken = descr_token
             current_click = click
             current_imp = impression
+            current_uid = uid
+            current_age = age
+            current_gender = gender
     else:
         if current_qid:
             for i in current_qids:
