@@ -41,7 +41,7 @@ for line in sys.stdin:
             current_qtoken = query_token
             current_keyid = keyid
             current_ktoken = key_token
-            current_descrid - descrid
+            current_descrid = descrid
             current_dtoken = descr_token
             current_click = click
             current_imp = impression
@@ -58,7 +58,7 @@ for line in sys.stdin:
         current_qtoken = query_token
         current_keyid = keyid
         current_ktoken = key_token
-        current_descrid - descrid
+        current_descrid = descrid
         current_dtoken = descr_token
         current_click = click
         current_imp = impression
