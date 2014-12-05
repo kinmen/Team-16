@@ -15,7 +15,7 @@ The categorical features we chose to employ were gender, age, and the token simi
 
 Features
 -------------
-## Aggregating the data
+### Aggregating the data
 #### Prediction Based on Age
 
 
@@ -46,13 +46,34 @@ The results of this MapReduce, like with Age, is then used as inputs for the sec
 
 #### Prediction By Similarity Index
 
-<!--We use a similarity ratio to measure the similarity between ids through their token-->
+To begin, the files <code>titleid_tokensid.txt, queryid_tokensid.txt, descriptionsid_tokensid.txt, and purchasedkeywordid_tokensid.txt</code> were each run in MapReduce with their corresponding <code>*_append.py</code> file (e.g. <code>title_file_append.py</code> was run with <code>titleid_tokensid.txt</code> file and an identity reducer). This was done because otherwise, each of the token files were indistinguishable from one another.
+
+Using the outputs from the above MapReduce along with the training data, we ran four MapReduce jobs to append the tokens to their subsequent ids. The Map-Reduce files are as follows:
+<ul>
+    <li><code>mapper_tok_1.py, reducer_tok_1.py</code></li>
+    <li><code>mapper_tok_2.py, reducer_tok_2.py</code></li>
+    <li><code>mapper_tok_3.py, reducer_tok_3.py</code></li>
+    <li><code>mapper_tok_4.py, reducer_tok_4.py</code></li>
+</ul>
+
+After all MapReduce jobs are completed, a final map reduce is run by using the file <code>token_3.py</code> as the mapper and an identity reducer. The final map reduce calculates similarity ratios for the number of matching tokens between:
+<blockquote>
+    <ul>
+        <li>query to title</li>
+        <li>query to description</li>
+        <li>query to key</li>
+        <li>query to title and description</li>
+        <li>query to title and key</li>
+        <li>query to description and key</li>
+        <li>query to title, key, description</li>
+    </ul>
+</blockquote>
 
 
 
 Model
 -------------
-## Naive Bayes
+### Naive Bayes
 
 After getting our output from the Aggregating Data MapReduce, <code>naive.py</code> is run locally. This file calculates the probabilities:
 <ul>
