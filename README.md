@@ -22,10 +22,14 @@ Features
 We aggregate our data using MapReduce, which is run on the Amazon Web Service System. Since age is in a separate file from the instance file, our first step is to join these files together. To do this, we need to run a MapReduce sorted by the key <code>userid</code>. To begin our process, we need to place <code>userid_profile.txt</code> with our training data so that everything can be called at once. So that things will be easier to call when introducing our inputs, <code>userid_profile.txt</code>will be renamed<code>part-uid</code> and placed together in the training data folder.
 
 MapReduce is then run with <code>mapper_age_1.py</code> and <code>reducer_age_1.py</code> with the inputs coming from the "training-60" folder including our userid_profile data. The output data is in the form:<br>
-    <code>'age \t click \t impression'</code>.
+    <blockquote>
+        <code>'age \t click \t impression'</code>.
+    </blockquote>
 
 The results of the MapReduce is then used as inputs for the second MapReduce, using the mapper and reducer <code>mapper_age_2.py</code> and <code>reducer_age_2.py</code>. This outputs data in the form:<br>
-    <code>'feature value \t feature name \t clicks \t impressions'</code>.
+    <blockquote>
+        <code>'feature value \t feature name \t clicks \t impressions'</code>.
+    </blockquote>
 
 
 #### Prediction Based on Gender
