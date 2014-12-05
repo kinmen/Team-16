@@ -28,7 +28,7 @@ for line in sys.stdin:
     if current_titleid == titleid:
         if ttoken != 'z':
             current_ttoken = ttoken
-        if current_qid != qid or current_keyid != keyid or current_descrid != descrid:
+        if (current_qid != qid or current_keyid != keyid or current_descrid != descrid) and current_qid != 'z':
             if current_click != 'z':
                 current_ids.append((current_keyid, current_ktoken, current_descrid, current_dtoken, current_qid, current_qtoken, current_titleid, current_ttoken, current_click, current_imp))
                 #print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' %  (current_keyid, current_ktoken, current_descrid, current_dtoken, current_qid, current_qtoken, current_titleid, current_ttoken, current_click, current_imp)
