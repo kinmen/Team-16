@@ -27,11 +27,11 @@ for line in sys.stdin:
         impression = int(impression)
     except ValueError:
         continue
-    if titleid == "-1":
+    if titleid == 'z':
         print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % (keyid, ktoken, descrid, dtoken, qid, qtoken, titleid, ttoken, click, impression)
         continue
     if current_titleid == titleid:
-        if ttoken != "-1":
+        if ttoken != 'z':
             current_ttoken = ttoken
         if current_qid != qid or current_keyid != keyid or current_descrid != descrid:
             if current_click != 'z':
