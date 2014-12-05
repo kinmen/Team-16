@@ -1,7 +1,7 @@
 Team-16 Project
 =============
 
-For our project, we are looking at the kaggle competition 'https://www.kddcup2012.org/c/kddcup2012-track2' where we are trying to predict click-through-rates (CTRs) based on different features. We use a Naive Bayes Model to predict our CTRs.
+For our project, we are looking at the [2012 kaggle competition](https://www.kddcup2012.org/c/kddcup2012-track2) where we are trying to predict click-through-rates (CTRs) based on different features. We use a Naive Bayes Model to predict our CTRs.
 
 
 Features
@@ -28,6 +28,9 @@ The results of this MapReduce, like with Age, is then used as inputs for the sec
     <code>'feature value \t feature name \t clicks \t impression'</code>
 
 #### Prediction By Similarity Index
+
+We use a similarity ratio to measure the similarity between ids through their token
+
 
 
 Model
