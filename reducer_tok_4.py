@@ -12,6 +12,7 @@ current_qid = None
 current_qtoken = None
 current_click = 0
 current_imp = 0
+current_ids = []
 
 for line in sys.stdin:
 
@@ -30,7 +31,7 @@ for line in sys.stdin:
             current_dtoken = descr_token
         if current_titleid != titleid or current_keyid != keyid or current_qid != qid:
             if current_click != 'z':
-               print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' %  (current_qid, current_qtoken, current_titleid, current_ttoken, current_keyid, current_ktoken, current_descrid, current_dtoken, current_click, current_imp)
+                current_ids.append((current_qid, current_qtoken, current_titleid, current_ttoken, current_keyid, current_ktoken, current_descrid, current_dtoken, current_click, current_imp))
             current_titleid = titleid
             current_ttoken = title_token
             current_qid = qid
@@ -43,8 +44,10 @@ for line in sys.stdin:
 
 
     else:
-        if current_descrid and current_click != 'z':
-            print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' %  (current_qid, current_qtoken, current_titleid, current_ttoken, current_keyid, current_ktoken, current_descrid, current_dtoken, current_click, current_imp)
+        if current_descrid:
+            for i in current_ids:
+                f = i[:7] + (current_dtoken,) + i[8:]
+                print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % f
         current_titleid = titleid
         current_ttoken = title_token
         current_qid = qid
@@ -58,4 +61,6 @@ for line in sys.stdin:
             current_imp = impression
 
 if current_descrid:
-    print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' %  (current_qid, current_qtoken, current_titleid, current_ttoken, current_keyid, current_ktoken, current_descrid, current_dtoken, current_click, current_imp)
+    for i in current_ids:
+                f = i[:7] + (current_dtoken,) + i[8:]
+                print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % f
