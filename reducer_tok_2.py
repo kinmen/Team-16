@@ -12,6 +12,7 @@ current_qid = None
 current_qtoken = None
 current_click = 0
 current_imp = 0
+current_ids = []
 
 
 for line in sys.stdin:
@@ -34,7 +35,8 @@ for line in sys.stdin:
             current_ttoken = ttoken
         if current_qid != qid or current+keyid != keyid or current_descrid != descrid:
             if current_click != 'z':
-                print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' %  (current_keyid, current_ktoken, current_descrid, current_dtoken, current_qid, current_qtoken, current_titleid, current_ttoken, current_click, current_imp)
+                current_ids.append((current_keyid, current_ktoken, current_descrid, current_dtoken, current_qid, current_qtoken, current_titleid, current_ttoken, current_click, current_imp))
+                #print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' %  (current_keyid, current_ktoken, current_descrid, current_dtoken, current_qid, current_qtoken, current_titleid, current_ttoken, current_click, current_imp)
             current_titleid = titleid
             current_qid = qid
             current_qtoken = qtoken
@@ -47,8 +49,12 @@ for line in sys.stdin:
 
 
     else:
-        if current_titleid and current_click != 'z'::
-            print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' %  (current_keyid, current_ktoken, current_descrid, current_dtoken, current_qid, current_qtoken, current_titleid, current_ttoken, current_click, current_imp)
+        if current_titleid:
+            for i in current_ids:
+                f = i[:7] + (current_ttoken,) + i[8:]
+                print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % f
+            #print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' %  (current_keyid, current_ktoken, current_descrid, current_dtoken, current_qid, current_qtoken, current_titleid, current_ttoken, current_click, current_imp)
+        current_ids = []
         current_titleid = titleid
         current_ttoken = ttoken
         current_qid = qid
@@ -62,4 +68,7 @@ for line in sys.stdin:
             current_imp = impression
 
 if current_titleid:
-     print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' %  (current_keyid, current_ktoken, current_descrid, current_dtoken, current_qid, current_qtoken, current_titleid, current_ttoken, current_click, current_imp)
+    for i in current_ids:
+        f = i[:7] + (current_ttoken,) + i[8:]
+        print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % f
+     #print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' %  (current_keyid, current_ktoken, current_descrid, current_dtoken, current_qid, current_qtoken, current_titleid, current_ttoken, current_click, current_imp)
