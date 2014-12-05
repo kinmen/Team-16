@@ -41,5 +41,5 @@ for line in sys.stdin:
 
     ### this prints the user, age, gender, qt_simi, qk_simi, qd_simi, qtk_simi, qtd_simi, qkd_simi, qtkd_simi, trueclicks, impressions
 
-    print '%s\t%s\t%s\t%s%s\t%s\t%s\t%s%s\t%s\t%s\t%s' % (uid, age, gender, qt_ratio, qk_ratio, qd_ratio, qtk_ratio, qtd_ratio, qkd_ratio, qtkd_ratio, click, impression)
+    print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % (uid, age, gender, qt_ratio, qk_ratio, qd_ratio, qtk_ratio, qtd_ratio, qkd_ratio, qtkd_ratio, click, impression)
 
