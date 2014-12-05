@@ -41,7 +41,7 @@ for line in sys.stdin:
             current_imp = impression
 
     else:
-        if current_qid:
+        if current_qid and current_click != 'z':
             print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' %  (current_titleid, current_ttoken, current_keyid, current_ktoken, current_descrid, current_dtoken, current_qid, current_qtoken, current_click, current_imp)
         current_titleid = titleid
         current_ttoken = title_token
