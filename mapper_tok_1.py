@@ -27,7 +27,9 @@ for line in sys.stdin:
         click = line[2]
         impression = line[3]
         queryid = line[9]
+        keyid = line[10]
         titleid = line [11]
+        descrid = line[12]
         print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % (queryid, query_tokens, titleid, title_tokens, keyid, key_tokens, descrid, descr_tokens, click, impression)
     elif line[0] == 'title':
         titleid = line[1]
