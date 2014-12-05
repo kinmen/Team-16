@@ -28,11 +28,11 @@ for line in sys.stdin:
         if query_token != 'z':
             current_qtoken = query_token
         if current_titleid != titleid or current_keyid != keyid or current_descrid != descrid:
-            print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' %  (current_titleid, current_ttoken, current_keyid, current_ktoken, current_descrid, current_dtoken, current_qid, current_qtoken, current_click, current_imp)
+            if current_click != 'z':
+                print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' %  (current_titleid, current_ttoken, current_keyid, current_ktoken, current_descrid, current_dtoken, current_qid, current_qtoken, current_click, current_imp)
             current_titleid = titleid
             current_ttoken = title_token
             current_qid = queryid
-            current_qtoken = query_token
             current_keyid = keyid
             current_ktoken = key_token
             current_descrid = descrid
