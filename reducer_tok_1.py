@@ -21,11 +21,6 @@ for line in sys.stdin:
 
     # split for indexing
     queryid, query_token, titleid, title_token, keyid, key_token, descrid, descr_token, click, impression = line.split('\t')
-    try:
-        click = int(click)
-        impression = int(impression)
-    except ValueError:
-        continue
     if queryid == 'z':
         print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % (titleid, title_token, keyid, key_token, descrid, descr_token, queryid, query_token, click, impression)
         continue
