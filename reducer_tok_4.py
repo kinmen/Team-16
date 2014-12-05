@@ -52,9 +52,8 @@ for line in sys.stdin:
         current_ktoken = key_token
         current_descrid = descrid
         current_dtoken = descr_token
-        if click != 'z' and impression != 'z':
-            current_click = click
-            current_imp = impression
+        current_click = click
+        current_imp = impression
 
 if current_descrid:
     for i in current_ids:

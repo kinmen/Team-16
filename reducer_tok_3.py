@@ -21,7 +21,7 @@ for line in sys.stdin:
 
     # split for indexing
     keyid, key_token, descrid, descr_token, qid, query_token, titleid, title_token, click, impression = line.split('\t')
-    if keyid == "-1":
+    if keyid == "z":
         print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' %  (descrid, descr_token, qid, query_token, titleid, title_token, keyid, key_token, click, impression)
         continue
     if current_keyid == keyid:
