@@ -48,6 +48,7 @@ for line in sys.stdin:
             for i in current_ids:
                 f = i[:7] + (current_dtoken,) + i[8:]
                 print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % f
+        current_ids = []
         current_titleid = titleid
         current_ttoken = title_token
         current_qid = qid
