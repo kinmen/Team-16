@@ -24,7 +24,7 @@ for line in sys.stdin:
     if current_descrid == descrid:
         if descr_token != 'z':
             current_dtoken = descr_token
-        if current_titleid != titleid or current_keyid != keyid or current_qid != qid:
+        if (current_titleid != titleid or current_keyid != keyid or current_qid != qid) and current_titleid != 'z':
             if current_click != 'z':
                 current_ids.append((current_qid, current_qtoken, current_titleid, current_ttoken, current_keyid, current_ktoken, current_descrid, current_dtoken, current_click, current_imp))
             current_titleid = titleid
