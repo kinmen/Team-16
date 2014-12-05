@@ -76,11 +76,11 @@ Model
 ### Naive Bayes
 
 
-1. naive.py identity on output of token mapreduce and output of gender and age
+<!--1. naive.py identity on output of token mapreduce and output of gender and age
 2. naive_mapper_tok_1-4
 3. naive_mapper_agegender_5
 4. naive_token_3
-5. naive_mapper_2
+5. naive_mapper_2-->
 
 
 
