@@ -15,7 +15,7 @@ current_imp = 0
 current_uid = None
 current_age = None
 current_gender = None
-
+current_qids = []
 
 for line in sys.stdin:
 
@@ -29,7 +29,7 @@ for line in sys.stdin:
         impression = int(impression)
     except ValueError:
         continue
-    if queryid == "-1":
+    if queryid == "z":
         print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % (titleid, title_token, keyid, key_token, descrid, descr_token, queryid, query_token, click, impression, uid, age, gender)
         continue
     if current_qid == queryid:

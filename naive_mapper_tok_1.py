@@ -5,19 +5,19 @@ import sys
 for line in sys.stdin:
 
     # setting default parameters for sorting
-    queryid = -1
-    titleid = -1
-    keyid = -1
-    descrid = -1
-    query_tokens = -1
-    title_tokens = -1
-    key_tokens = -1
-    descr_tokens = -1
-    click = -1
-    impression = -1
-    age = -1
-    gender = -1
-    uid = -1
+    queryid = 'z'
+    titleid = 'z'
+    keyid = 'z'
+    descrid = 'z'
+    query_tokens = 'z'
+    title_tokens = 'z'
+    key_tokens = 'z'
+    descr_tokens = 'z'
+    click = 'z'
+    impression = 'z'
+    age = 'z'
+    gender = 'z'
+    uid = 'z'
     
 
     # eliminate entrailing white spaces
@@ -31,7 +31,9 @@ for line in sys.stdin:
         click = line[2]
         impression = line[3]
         queryid = line[9]
+        keyid = line[10]
         titleid = line [11]
+        descrid = line[12]
         uid = line[-1]
         print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % (queryid, query_tokens, titleid, title_tokens, keyid, key_tokens, descrid, descr_tokens, click, impression , uid, age, gender)
     elif line[0] == 'title':

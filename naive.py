@@ -13,8 +13,8 @@ def train(data):
     totalimps = 0
     global pclick
     k = 0
-    simiclick = []
-    siminoclick = []
+    simiclick = {}
+    siminoclick = {}
     
     #compute total clicks and total impressions, for P(Y)
     for line in data:
@@ -29,11 +29,14 @@ def train(data):
             continue
         if feature not in conditionalsclick.keys():
             conditionalsclick[feature] = {}
-        if feature == 'simi':
+        if 'simi' in feature:
+            if feature not in simiclick.keys():
+                simiclick[feature] = []
+                siminoclick[feature] = []
             for i in xrange(clicks):
-                simiclick.append(float(value))
+                simiclick[feature].append(float(value))
             for j in xrange(imps-clicks):
-                siminoclick.append(float(value))
+                siminoclick[feature].append(float(value))
         else:
             conditionalsclick[feature][value] = instance
         
@@ -49,9 +52,9 @@ def train(data):
     
     #compute conditional probabilities. P(X|Y), P(X|not Y)
     for feature in conditionalsclick:
-        if feature == 'simi':
-            conditionalsclick[feature]['click'] = (np.mean(simiclick), np.var(simiclick))
-            conditionalsclick[feature]['noclick'] = (np.mean(siminoclick), np.var(siminoclick))
+        if 'simi' in feature:
+            conditionalsclick[feature]['click'] = (np.mean(simiclick[feature]), np.var(simiclick[feature]))
+            conditionalsclick[feature]['noclick'] = (np.mean(siminoclick[feature]), np.var(siminoclick[feature]))
             conditionalsclick[feature]['UNK'] = (1,1)
         else:
             k = len(conditionalsclick[feature].keys()) + 1
