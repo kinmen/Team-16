@@ -24,24 +24,31 @@ for line in sys.stdin:
 
     # split for indexing
     queryid, query_token, titleid, title_token, keyid, key_token, descrid, descr_token, click, impression, uid, age, gender = line.split('\t')
-    try:
-        click = int(click)
-        impression = int(impression)
-    except ValueError:
-        continue
     if queryid == "z":
-        print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % (titleid, title_token, keyid, key_token, descrid, descr_token, queryid, query_token, click, impression, uid, age, gender)
+        print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % (titleid, title_token, keyid, key_token, descrid, descr_token, queryid, query_token, click, impression, uid, age, gender)
         continue
     if current_qid == queryid:
-        if query_token != "-1":
+        if query_token != 'z':
             current_qtoken = query_token
-        if click != -1 and impression != -1:
-            current_click += click
-            current_imp += impression
-
+        if (current_titleid != titleid or current_keyid != keyid or current_descrid != descrid) and current_title != 'z':
+            if current_click != 'z':
+                current_qids.append((current_titleid, current_ttoken, current_keyid, current_ktoken, current_descrid, current_dtoken, current_qid, current_qtoken, current_click, current_imp))
+                #print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' %  (current_titleid, current_ttoken, current_keyid, current_ktoken, current_descrid, current_dtoken, current_qid, current_qtoken, current_click, current_imp)
+            current_titleid = titleid
+            current_ttoken = title_token
+            current_qid = queryid
+            current_keyid = keyid
+            current_ktoken = key_token
+            current_descrid = descrid
+            current_dtoken = descr_token
+            current_click = click
+            current_imp = impression
     else:
         if current_qid:
-            print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' %  (current_titleid, current_ttoken, current_keyid, current_ktoken, current_descrid, current_dtoken, current_qid, current_qtoken, current_click, current_imp, current_uid, current_age, current_gender)
+            for i in current_qids:
+                f = i[:7] + (current_qtoken,) + i[8:]
+                print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % f
+        current_qids = []
         current_titleid = titleid
         current_ttoken = title_token
         current_qid = queryid
@@ -50,11 +57,13 @@ for line in sys.stdin:
         current_ktoken = key_token
         current_descrid = descrid
         current_dtoken = descr_token
-        current_click = 0
-        current_imp = 0
+        current_click = click
+        current_imp = impression
         current_uid = uid
         current_age = age
         current_gender = gender
 
 if current_qid:
-    print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' %  (current_titleid, current_ttoken, current_keyid, current_ktoken, current_descrid, current_dtoken, current_qid, current_qtoken, current_click, current_imp, current_uid, current_age, current_gender)
+    for i in current_qids:
+        f = i[:7] + (current_qtoken,) + i[8:]
+        print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % f
