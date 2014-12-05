@@ -28,13 +28,12 @@ for line in sys.stdin:
     uid, age, gender, descrid, descr_token, qid, query_token, titleid, title_token, keyid, key_token, click, impression  = line.split('\t')
 
     if current_uid == uid:
-        if age != "-1" and gender != "-1":
+        if age != 'z' and gender != 'z':
             current_age = age
             current_gender = gender
-        else:
-            if (current_titleid != titleid or current_keyid != keyid or current_qid != qid or current_descrid != descrid):
-                if current_click != 'z':
-                    current_ids.append((current_qid, current_qtoken, current_titleid, current_ttoken, current_keyid, current_ktoken, current_descrid, current_dtoken, current_click, current_imp, current_uid, current_age, current_gender))
+        if (current_titleid != titleid or current_keyid != keyid or current_qid != qid or current_descrid != descrid):
+            if current_click != 'z':
+                current_ids.append((current_qid, current_qtoken, current_titleid, current_ttoken, current_keyid, current_ktoken, current_descrid, current_dtoken, current_click, current_imp, current_uid, current_age, current_gender))
             current_titleid = titleid
             current_ttoken = title_token
             current_qid = qid
@@ -50,7 +49,7 @@ for line in sys.stdin:
         if current_uid:
             for i in current_ids:
                 f = i[:11] + (current_age, current_gender)
-                print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % f
+                print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % f
         current_ids = []
         current_titleid = titleid
         current_ttoken = title_token
