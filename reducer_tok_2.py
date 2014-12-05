@@ -22,11 +22,6 @@ for line in sys.stdin:
 
     # split for indexing
     titleid, ttoken, keyid, ktoken, descrid, dtoken, qid, qtoken, click, impression = line.split('\t')
-    try:
-        click = int(click)
-        impression = int(impression)
-    except ValueError:
-        continue
     if titleid == 'z':
         print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % (keyid, ktoken, descrid, dtoken, qid, qtoken, titleid, ttoken, click, impression)
         continue
@@ -63,9 +58,8 @@ for line in sys.stdin:
         current_ktoken = ktoken
         current_descrid = descrid
         current_dtoken = dtoken
-        if click != -1 and impression != -1:
-            current_click = click
-            current_imp = impression
+        current_click = click
+        current_imp = impression
 
 if current_titleid:
     for i in current_ids:
