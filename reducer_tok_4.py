@@ -25,10 +25,21 @@ for line in sys.stdin:
         impression = int(impression)
     except ValueError:
         continue
-
     if current_descrid == descrid:
         if descr_token != 'z':
             current_dtoken = descr_token
+        if current_titleid != titleid or current_keyid != keyid or current_qid != qid:
+            print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' %  (current_qid, current_qtoken, current_titleid, current_ttoken, current_keyid, current_ktoken, current_descrid, current_dtoken, current_click, current_imp)
+            current_titleid = titleid
+            current_ttoken = title_token
+            current_qid = qid
+            current_qtoken = query_token
+            current_keyid = keyid
+            current_ktoken = key_token
+            current_descrid = descrid
+            current_dtoken = descr_token
+            current_click = click
+            current_imp = impression
 
 
     else:
