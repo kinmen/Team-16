@@ -21,11 +21,6 @@ for line in sys.stdin:
 
     # split for indexing
     keyid, key_token, descrid, descr_token, qid, query_token, titleid, title_token, click, impression = line.split('\t')
-    try:
-        click = int(click)
-        impression = int(impression)
-    except ValueError:
-        continue
     if keyid == "-1":
         print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' %  (descrid, descr_token, qid, query_token, titleid, title_token, keyid, key_token, click, impression)
         continue
@@ -62,12 +57,11 @@ for line in sys.stdin:
         current_ktoken = key_token
         current_descrid = descrid
         current_dtoken = descr_token
-        if click != 'z' and impression != 'z':
-            current_click = click
-            current_imp = impression
+        current_click = click
+        current_imp = impression
 
 if current_keyid:
     for i in current_ids:
-            f = i[:7] + (current_ktoken,) + i[8:]
-            print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % f
+        f = i[:7] + (current_ktoken,) + i[8:]
+        print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % f
     #print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' %  (current_descrid, current_dtoken, current_qid, current_qtoken, current_titleid, current_ttoken, current_keyid, current_ktoken, current_click, current_imp)
