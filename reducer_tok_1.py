@@ -12,7 +12,7 @@ current_qid = None
 current_qtoken = None
 current_click = 0
 current_imp = 0
-
+current_qids = []
 
 for line in sys.stdin:
 
@@ -29,7 +29,8 @@ for line in sys.stdin:
             current_qtoken = query_token
         if current_titleid != titleid or current_keyid != keyid or current_descrid != descrid:
             if current_click != 'z':
-                print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' %  (current_titleid, current_ttoken, current_keyid, current_ktoken, current_descrid, current_dtoken, current_qid, current_qtoken, current_click, current_imp)
+                current_qids.append((current_titleid, current_ttoken, current_keyid, current_ktoken, current_descrid, current_dtoken, current_qid, current_qtoken, current_click, current_imp))
+                #print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' %  (current_titleid, current_ttoken, current_keyid, current_ktoken, current_descrid, current_dtoken, current_qid, current_qtoken, current_click, current_imp)
             current_titleid = titleid
             current_ttoken = title_token
             current_qid = queryid
@@ -41,8 +42,12 @@ for line in sys.stdin:
             current_imp = impression
 
     else:
-        if current_qid and current_click != 'z':
-            print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' %  (current_titleid, current_ttoken, current_keyid, current_ktoken, current_descrid, current_dtoken, current_qid, current_qtoken, current_click, current_imp)
+        if current_qid:
+            for i in current_qids:
+                f = i[:7] + (current_qtoken,) + i[8:]
+                print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % f
+                #print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' %  (current_titleid, current_ttoken, current_keyid, current_ktoken, current_descrid, current_dtoken, current_qid, current_qtoken, current_click, current_imp)
+        current_qids = []
         current_titleid = titleid
         current_ttoken = title_token
         current_qid = queryid
@@ -55,4 +60,7 @@ for line in sys.stdin:
         current_imp = impression
 
 if current_qid:
-    print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' %  (current_titleid, current_ttoken, current_keyid, current_ktoken, current_descrid, current_dtoken, current_qid, current_qtoken, current_click, current_imp)
+    for i in current_qids:
+        f = i[:7] + (current_qtoken,) + i[8:]
+        print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % f
+   # print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' %  (current_titleid, current_ttoken, current_keyid, current_ktoken, current_descrid, current_dtoken, current_qid, current_qtoken, current_click, current_imp)
