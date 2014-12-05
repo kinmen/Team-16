@@ -1,5 +1,10 @@
 #!/usr/bin/env python
 
+"""
+Outputs:
+    'Gender \t Clicks \t Impressions'
+"""
+
 import sys
 
 

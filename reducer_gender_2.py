@@ -1,5 +1,10 @@
 #!/usr/bin/env python
 
+"""
+Outputs:
+    'Gender_Value \t 'gender' \t Clicks \t Impressions'
+"""
+
 import sys
 
 current_click = 0

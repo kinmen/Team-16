@@ -1,5 +1,14 @@
 #!/usr/bin/env python
 
+"""
+Inputs:
+    1. Training data files
+    2. userid_profile.txt
+
+Outputs:
+    'UserID \t Clicks \t Impressions \t Age'
+"""
+
 import sys
 
 for line in sys.stdin:
@@ -17,12 +26,12 @@ for line in sys.stdin:
     line = line.split('\t')
 
     # for data
-    if len(line) > 3:
+    if len(line) > 3: # if instances
         click = line[2]
         impression = line[3]
         uid = line[-1]
         print '%s\t%s\t%s\t%s' % (uid, click, impression, age)
-    else:
+    else: # userid_profile.txt file
         uid = line[0]
         age = line[-1]
         print '%s\t%s\t%s\t%s' % (uid, click, impression, age)

@@ -1,4 +1,13 @@
 #!/usr/bin/env python
+"""
+Inputs:
+    The outputs of the mapper_age_1.py and reducer_age_1.py
+
+Outputs:
+    'Age \t Clicks \t Impressions'
+"""
+
+
 
 import sys
 

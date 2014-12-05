@@ -1,5 +1,10 @@
 #!/usr/bin/env python
 
+"""
+Outputs:
+    'Age_Value \t 'age' \t Clicks \t Impressions'
+"""
+
 import sys
 
 current_click = 0

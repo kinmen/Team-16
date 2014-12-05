@@ -1,5 +1,10 @@
 #!/usr/bin/env python
 
+"""
+Outputs:
+    'Age \t Clicks \t Impressions'
+"""
+
 import sys
 
 
@@ -32,8 +37,8 @@ for line in sys.stdin:
     else:
         if current_uid:
             # print stdout
-            # print '%s\t%s\t%s\t%s' % (current_uid, current_age, current_click, current_impression)
             print '%s\t%s\t%s' % (current_age, current_click, current_impression)
+
         # reset parameters
         if click != "-1" and impression != "-1":
             current_click = float(int(click))
@@ -46,5 +51,4 @@ for line in sys.stdin:
 
 # print last line
 if current_uid:
-    # print '%s\t%s\t%s\t%s' % (current_uid, current_age, current_click, current_impression)
     print '%s\t%s\t%s' % (current_age, current_click, current_impression)
