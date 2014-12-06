@@ -24,4 +24,8 @@ for line in sys.stdin:
         uid = line[-1]
         depth = line[7]
         position = line[8]
-        print '%s\t%s\t%s\t%s' % (uid, click, impression, depth, position)
+        rel_pos = (depth - position)/depth
+        print '%s\t%s\t%s\t%s' % (depth, 'depth', click, impression)
+        print '%s\t%s\t%s\t%s' % (position, 'position', click, impression)
+        print '%s\t%s\t%s\t%s' % (rel_pos, 'relpos', click, impression)
+        #value, feature, click, imp
