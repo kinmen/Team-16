@@ -101,8 +101,18 @@ The following files are run to clean up validation data into the format that we 
     <li><code>naive_token_simi.py, identity reducer</code></li>
 </ol>
 
-The final output of these MapReduce jobs is then run through the final MapReduce
-<code>naive_pred_mapper.py, identity reducer</code>. This file is run with <code>naive_probabilities.txt</code> as a cache file. This file implements out model and outputs predictions.
+The final output of these MapReduce jobs is then run through the the final MapReduce. The following files are run with <code>naive_probabilities.txt</code> as a cache file. They will give our model's output predictions.
+<ol>
+    <li><code>naive_pred_mapper.py, identity reducer</code></li>
+    <li><code>naive_pred_agender_mapper.py, identity reducer</code></li>
+    <li><code>naive_pred_agqtkdsimi_mapper.py, identity reducer</code></li>
+    <li><code>naive_pred_simi_mapper.py, identity reducer</code></li>
+</ol>
+
+1. Runs predictions using age, gender, and every similarity ratio
+2. Runs predictions using only age and gender
+3. Runs predictions using age, gender, and the query to key, description, title ratio
+4. Runs predictions using only all of the similarity ratios
 
 The outputs are downloaded and concatenated locally then run in R and the R script <code>auc.R</code> to get our AUC score.
 
