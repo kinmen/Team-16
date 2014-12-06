@@ -63,7 +63,7 @@ def get_prob_from_dict(feature, value):
 def normpdf(x, mean, var):
     pi = 3.1415926
     denom = (2*pi*var)**.5
-    num = math.exp(-((float(x)-float(mean))**2)/(2*var))
+    num = math.exp(-(float(x)-float(mean))**2/(2*var))
     return num/denom
 
 

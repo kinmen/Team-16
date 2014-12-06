@@ -31,6 +31,7 @@ def train(data):
             continue
         if feature not in conditionalsclick.keys():
             conditionalsclick[feature] = {}
+        #if feature is a similarity index, add it to an array so that we can calculate the mean and var later.
         if 'simi' in feature:
             if feature not in simiclick.keys():
                 simiclick[feature] = []
@@ -54,10 +55,11 @@ def train(data):
     
     #compute conditional probabilities. P(X|Y), P(X|not Y)
     for feature in conditionalsclick:
+        #If similarity ratio, 
         if 'simi' in feature:
             conditionalsclick[feature]['click'] = (np.mean(simiclick[feature]), np.var(simiclick[feature]))
             conditionalsclick[feature]['noclick'] = (np.mean(siminoclick[feature]), np.var(siminoclick[feature]))
-            conditionalsclick[feature]['UNK'] = (1,1)
+            conditionalsclick[feature]['UNK'] = (0,0)
         else:
             k = len(conditionalsclick[feature].keys()) + 1
             for value in conditionalsclick[feature]:

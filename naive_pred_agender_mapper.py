@@ -90,21 +90,23 @@ for line in sys.stdin:
     impressions = int(float(impressions))
     probs_age = get_prob_from_dict("age", age)
     probs_gender = get_prob_from_dict("gender", gender)
-    ###
-    probs_qt_simi = calc_prob_for_simi('qt_simi', qt_simi)
-    probs_qk_simi = calc_prob_for_simi('qk_simi', qk_simi)
-    probs_qd_simi = calc_prob_for_simi('qd_simi', qd_simi)
-    probs_qtk_simi = calc_prob_for_simi('qtk_simi', qtk_simi)
-    probs_qtd_simi = calc_prob_for_simi('qtd_simi', qtd_simi)
-    probs_qkd_simi = calc_prob_for_simi('qkd_simi', qkd_simi)
-    probs_qtkd_simi = calc_prob_for_simi('qtkd_simi', qtkd_simi)
-    ###
+    # ###
+    # probs_qt_simi = calc_prob_for_simi('qt_simi', qt_simi)
+    # probs_qk_simi = calc_prob_for_simi('qk_simi', qk_simi)
+    # probs_qd_simi = calc_prob_for_simi('qd_simi', qd_simi)
+    # probs_qtk_simi = calc_prob_for_simi('qtk_simi', qtk_simi)
+    # probs_qtd_simi = calc_prob_for_simi('qtd_simi', qtd_simi)
+    # probs_qkd_simi = calc_prob_for_simi('qkd_simi', qkd_simi)
+    # probs_qtkd_simi = calc_prob_for_simi('qtkd_simi', qtkd_simi)
+    # ###
     
 
     total = get_prob_from_dict("Total", "Total")
     probs = [1,1]
-    probs[0] = float(probs_age[0]*probs_gender[0]*probs_qt_simi[0]*probs_qk_simi[0]*probs_qd_simi[0]*probs_qtk_simi[0]* probs_qtd_simi[0]*probs_qkd_simi[0]*probs_qtkd_simi[0])
-    probs[1] = float(probs_age[1]*probs_gender[1]*probs_qt_simi[1]*probs_qk_simi[1]*probs_qd_simi[1]*probs_qtk_simi[1]* probs_qtd_simi[1]*probs_qkd_simi[1]*probs_qtkd_simi[1])
+    probs[0] = float(probs_age[0]*probs_gender[0])
+    probs[1] = float(probs_age[1]*probs_gender[1])
+    # probs[0] = float(probs_age[0]*probs_gender[0]*probs_qt_simi[0]*probs_qk_simi[0]*probs_qd_simi[0]*probs_qtk_simi[0]* probs_qtd_simi[0]*probs_qkd_simi[0]*probs_qtkd_simi[0])
+    # probs[1] = float(probs_age[1]*probs_gender[1]*probs_qt_simi[1]*probs_qk_simi[1]*probs_qd_simi[1]*probs_qtk_simi[1]* probs_qtd_simi[1]*probs_qkd_simi[1]*probs_qtkd_simi[1])
     pclickgivendata = float(probs[0]*total[0])/((probs[0]*total[0])+(probs[1]*total[1]))
     click = 0
     if pclickgivendata > 0.5:
