@@ -4,7 +4,7 @@
 Inputs:
     1. Training data files
 Outputs:
-    'UserID \t Clicks \t Impressions \t Depth \t Position'
+    'Value \t feature \t Clicks \t Impressions'
 """
 
 import sys
