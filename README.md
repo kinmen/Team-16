@@ -90,7 +90,9 @@ The output of this is called <code>naive_probabilities.txt</code>
 
 
 After building the dictionary of conditional probabilities, we go back to using MapReduce for prediction.
-The following files are run to clean up validation data into the format that we want to finally do our predictions. They are run with <code>validation-20, titleid_tokensid.txt, queryid_tokensid.txt, descriptionsid_tokensid.txt, and purchasedkeywordid_tokensid.txt (appended as in Prediction By Similarity Index), userid_profile.txt</code>:
+
+
+The following files are run to get the validation data into the format that is useful for us. They are run with <code>validation-20, titleid_tokensid.txt, queryid_tokensid.txt, descriptionsid_tokensid.txt, and purchasedkeywordid_tokensid.txt (appended as in Prediction By Similarity Index), userid_profile.txt</code>:
 
 <ol>
     <li><code>naive_mapper_tok_1.py, naive_reducer_tok_1.py</code></li>
@@ -101,7 +103,7 @@ The following files are run to clean up validation data into the format that we 
     <li><code>naive_token_simi.py, identity reducer</code></li>
 </ol>
 
-The final output of these MapReduce jobs is then run through the the final MapReduce. The following files are run with <code>naive_probabilities.txt</code> as a cache file. They will give our model's output predictions.
+The final output of these MapReduce jobs is then run through a final MapReduce. The following files are run with <code>naive_probabilities.txt</code> as a cache file. They will give our model's output predictions.
 <ol>
     <li><code>naive_pred_mapper.py, identity reducer</code></li>
     <li><code>naive_pred_agender_mapper.py, identity reducer</code></li>
