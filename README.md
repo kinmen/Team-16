@@ -116,6 +116,4 @@ The final output of these MapReduce jobs is then run through the the final MapRe
 
 The outputs are downloaded and concatenated locally then run in R and the R script <code>auc.R</code> to get our AUC score.
 
-<span style='text-size:8px;'>
-    *Note: A more detailed explanation of our project can be found in the <code>Final Report.pdf</code>
-</span>
+*Note: A more detailed explanation of our project can be found in the <code>Final Report.pdf</code>
