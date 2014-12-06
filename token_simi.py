@@ -1,5 +1,20 @@
 #!/usr/bin/env python
 
+"""
+Input:
+    Output of mapper_tok_4.py and reducer_tok_4.py
+Output:
+    query_token_ratio, 'qt_simi', Click, Impression
+    query_key_ratio, 'qk_simi', Click, Impression
+    query_description_ratio, 'qd_simi', Click, Impression
+    query_token_key_ratio, 'qtk_simi', Click, Impression
+    query_token_description_ratio, 'qtd_simi', Click, Impression
+    query_key_dexcription_ratio, 'qkd_simi', Click, Impression
+    query_token_key_description_ratio, 'qtkd_simi', Click, Impression
+"""
+
+
+
 import sys
 
 for line in sys.stdin:
@@ -11,7 +26,7 @@ for line in sys.stdin:
     title_token = line[3]
     key_token = line[5]
     descr_token = line[7]
-    
+
     ### this creates a list of the tokens, splitting on the | they are
     ### separated by in the original data
     qtokens = query_token.split('|')

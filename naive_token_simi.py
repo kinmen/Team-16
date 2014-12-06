@@ -1,5 +1,12 @@
 #!/usr/bin/env python
 
+"""
+Input:
+    Output of naive_mapper_tok_4.py and naive_reducer_tok_4.py
+Output:
+    'UserID, Age, Gender, QT_ratio, QK_ratio, QD_ratio, QTK_ratio, QTD_ratio, QKD_ratio, QTDK_ratio, Click, Impression'
+"""
+
 import sys
 
 for line in sys.stdin:
@@ -7,7 +14,7 @@ for line in sys.stdin:
     line = line.strip()
     #qid, qtoken, titleid, ttoken, keyid, ktoken, descrid, dtoken, click, imp, uid, age, gender
     qid, query_token, titleid, title_token, keyid, key_token, descrid, descr_token, click, impression, uid, age, gender = line.split('\t')
-    
+
     ### this creates a list of the tokens, splitting on the | they are
     ### separated by in the original data
     qtokens = query_token.split('|')
