@@ -1,5 +1,10 @@
 #!/usr/bin/env python
 
+"""
+Output:
+    'KeyID \t Key_Tokens \t DescriptionID \t Description_Tokens \t QueryID \t Query_Tokens \t TitleID \t Title_Tokens \t Clicks \t Impressions \t UserId \t Age \t Gender'
+"""
+
 import sys
 
 current_titleid = None
@@ -25,16 +30,22 @@ for line in sys.stdin:
 
     # split for indexing
     titleid, ttoken, keyid, ktoken, descrid, dtoken, qid, qtoken, click, impression, uid, age, gender = line.split('\t')
-    if titleid == "z":
+
+    if titleid == "z": # these lines should be the other token files. We don't need to touch these in this job
         print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % (keyid, ktoken, descrid, dtoken, qid, qtoken, titleid, ttoken, click, impression, uid, age, gender)
         continue
+
     if current_titleid == titleid:
+        # the title token should be at the top for the respectivekey due to the "z" palceholder
         if ttoken != 'z':
             current_ttoken = ttoken
+
+        # we want each unique instance
         if (current_qid != qid or current_keyid != keyid or current_descrid != descrid or current_uid != uid) and current_qid != 'z':
             if current_click != 'z':
+                # make a list of tuples
                 current_ids.append((current_keyid, current_ktoken, current_descrid, current_dtoken, current_qid, current_qtoken, current_titleid, current_ttoken, current_click, current_imp, current_uid, current_age, current_gender))
-                #print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' %  (current_keyid, current_ktoken, current_descrid, current_dtoken, current_qid, current_qtoken, current_titleid, current_ttoken, current_click, current_imp)
+            # titleid and titletoken features should remain the same, but the other features should be updated
             current_titleid = titleid
             current_qid = qid
             current_qtoken = qtoken
@@ -51,9 +62,11 @@ for line in sys.stdin:
 
     else:
         if current_titleid:
+            # print out each tuple in the list
             for i in current_ids:
                 f = i[:7] + (current_ttoken,) + i[8:]
                 print '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % f
+        # reset parameters
         current_ids = []
         current_titleid = titleid
         current_ttoken = ttoken
@@ -69,6 +82,7 @@ for line in sys.stdin:
         current_age = age
         current_gender = gender
 
+# print last line
 if current_titleid:
     for i in current_ids:
         f = i[:7] + (current_ttoken,) + i[8:]
