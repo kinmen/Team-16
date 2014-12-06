@@ -1,7 +1,6 @@
 Team-16 Project
 =============
 
-
 Introduction
 -------------
 The objective of this project is to predict the empirical CTR through statistical models with the categorical features of the given data.
@@ -105,5 +104,8 @@ The following files are run to clean up validation data into the format that we 
 The final output of these MapReduce jobs is then run through the final MapReduce
 <code>naive_pred_mapper.py, identity reducer</code>. This file is run with <code>naive_probabilities.txt</code> as a cache file. This file implements out model and outputs predictions.
 
+The outputs are downloaded and concatenated locally then run in R and the R script <code>auc.R</code> to get our AUC score.
 
-
+<span style='text-size:8px;'>
+    *Note: A more detailed explanation of our project can be found in the <code>Final Report.pdf</code>
+</span>
