@@ -35,10 +35,12 @@ for line in sys.stdin:
         # the key token should be at the top for the respective key due to the "z" placeholder
         if key_token != 'z':
             current_ktoken = key_token
-        # keyid and keytoken features should remain the same, but the other features should be updated
+
         if (current_titleid != titleid or current_qid != qid or current_descrid != descrid) and current_titleid != 'z':
             if current_click != 'z':
+                # make a list of tuples
                 current_ids.append((current_descrid, current_dtoken, current_qid, current_qtoken, current_titleid, current_ttoken, current_keyid, current_ktoken, current_click, current_imp))
+            # keyid and keytoken features should remain the same, but the other features should be updated
             current_titleid = titleid
             current_ttoken = title_token
             current_qid = qid
